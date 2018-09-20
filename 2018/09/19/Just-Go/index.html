@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="Go的特点Go语法特性">
+  <meta name="description" content="Go的特点 在语言层面上提供并发和传值能力 123456789101112131415161718192021package mainimport &quot;fmt&quot;func sum(a []int, result chan int)  &amp;#123;	sum := 0	for _, v := range a &amp;#123;		sum += v	&amp;#125;	result &amp;lt;- sum&amp;#125;fun">
 <meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Just Go">
 <meta property="og:url" content="http://jaxli.com/2018/09/19/Just-Go/index.html">
 <meta property="og:site_name" content="武器大师的演武场">
-<meta property="og:description" content="Go的特点Go语法特性">
+<meta property="og:description" content="Go的特点 在语言层面上提供并发和传值能力 123456789101112131415161718192021package mainimport &quot;fmt&quot;func sum(a []int, result chan int)  &amp;#123;	sum := 0	for _, v := range a &amp;#123;		sum += v	&amp;#125;	result &amp;lt;- sum&amp;#125;fun">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-19T11:25:11.000Z">
+<meta property="og:updated_time" content="2018-09-20T02:39:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Just Go">
-<meta name="twitter:description" content="Go的特点Go语法特性">
+<meta name="twitter:description" content="Go的特点 在语言层面上提供并发和传值能力 123456789101112131415161718192021package mainimport &quot;fmt&quot;func sum(a []int, result chan int)  &amp;#123;	sum := 0	for _, v := range a &amp;#123;		sum += v	&amp;#125;	result &amp;lt;- sum&amp;#125;fun">
 
 
 
@@ -323,12 +323,24 @@
                 
               
 
-              <time title="Created: 2018-09-19 19:23:20 / Modified: 19:25:11" itemprop="dateCreated datePublished" datetime="2018-09-19T19:23:20+08:00">2018-09-19</time>
+              <time title="Created: 2018-09-19 19:23:20" itemprop="dateCreated datePublished" datetime="2018-09-19T19:23:20+08:00">2018-09-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-20 10:39:02" itemprop="dateModified" datetime="2018-09-20T10:39:02+08:00">2018-09-20</time>
               
             
           </span>
@@ -361,7 +373,17 @@
       
 
       
-        <h4 id="Go的特点"><a href="#Go的特点" class="headerlink" title="Go的特点"></a>Go的特点</h4><h4 id="Go语法特性"><a href="#Go语法特性" class="headerlink" title="Go语法特性"></a>Go语法特性</h4>
+        <h4 id="Go的特点"><a href="#Go的特点" class="headerlink" title="Go的特点"></a>Go的特点</h4><ul>
+<li><p>在语言层面上提供并发和传值能力</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(a []<span class="keyword">int</span>, result <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span>  &#123;</span><br><span class="line">	sum := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		sum += v</span><br><span class="line">	&#125;</span><br><span class="line">	result &lt;- sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">-5</span>, <span class="number">1</span>, <span class="number">0</span>&#125;</span><br><span class="line">	result := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	<span class="keyword">go</span> sum(a[:<span class="built_in">len</span>(a)/<span class="number">2</span>], result)</span><br><span class="line">	<span class="keyword">go</span> sum(a[<span class="built_in">len</span>(a)/<span class="number">2</span>:], result)</span><br><span class="line">	x, y := &lt;-result, &lt;-result</span><br><span class="line"></span><br><span class="line">	fmt.Println(x, y, x+y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用组合而不是继承来扩展功能</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phone <span class="keyword">interface</span> &#123;</span><br><span class="line">	call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NokiaPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(nokiaPhone NokiaPhone)</span> <span class="title">call</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am Nokia, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(iPhone IPhone)</span> <span class="title">call</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am iPhone, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> phone Phone</span><br><span class="line"></span><br><span class="line">	phone = <span class="built_in">new</span>(NokiaPhone)</span><br><span class="line">	phone.call()</span><br><span class="line"></span><br><span class="line">	phone = <span class="built_in">new</span>(IPhone)</span><br><span class="line">	phone.call()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导入包的时候，会默认在main方法前调用init方法。可以保证某些功能得到初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &#123;</span><br><span class="line">	&quot;database/sql&quot;</span><br><span class="line">	_ &quot;github.com/goinaction/code/chapter3/dbdriver/postgres&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	sql.Open(&quot;postgres&quot;, &quot;mydb&quot;)   //之所以能够使用，是因为postgres中通过init将自身注册到了sql包</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
 
@@ -539,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Go的特点"><span class="nav-number">1.</span> <span class="nav-text">Go的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Go语法特性"><span class="nav-number">2.</span> <span class="nav-text">Go语法特性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Go的特点"><span class="nav-number">1.</span> <span class="nav-text">Go的特点</span></a></li></ol></div>
             
 
           </div>
