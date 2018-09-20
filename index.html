@@ -277,6 +277,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jaxli.com/2018/09/20/Go开源框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的演武场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/20/Go开源框架/" itemprop="url">
+                  Go开源框架
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-20 14:04:07 / Modified: 14:05:15" itemprop="dateCreated datePublished" datetime="2018-09-20T14:04:07+08:00">2018-09-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Beego/Gin//Martini/Buffalo/Echo/Iris/Revel</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jaxli.com/2018/09/19/Just-Go/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -340,7 +480,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-20 10:39:02" itemprop="dateModified" datetime="2018-09-20T10:39:02+08:00">2018-09-20</time>
+                <time title="Modified: 2018-09-20 19:26:19" itemprop="dateModified" datetime="2018-09-20T19:26:19+08:00">2018-09-20</time>
               
             
           </span>
@@ -383,7 +523,10 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phone <span class="keyword">interface</span> &#123;</span><br><span class="line">	call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NokiaPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(nokiaPhone NokiaPhone)</span> <span class="title">call</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am Nokia, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(iPhone IPhone)</span> <span class="title">call</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am iPhone, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> phone Phone</span><br><span class="line"></span><br><span class="line">	phone = <span class="built_in">new</span>(NokiaPhone)</span><br><span class="line">	phone.call()</span><br><span class="line"></span><br><span class="line">	phone = <span class="built_in">new</span>(IPhone)</span><br><span class="line">	phone.call()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>导入包的时候，会默认在main方法前调用init方法。可以保证某些功能得到初始化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &#123;</span><br><span class="line">	&quot;database/sql&quot;</span><br><span class="line">	_ &quot;github.com/goinaction/code/chapter3/dbdriver/postgres&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	sql.Open(&quot;postgres&quot;, &quot;mydb&quot;)   //之所以能够使用，是因为postgres中通过init将自身注册到了sql包</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	_ <span class="string">"github.com/goinaction/code/chapter3/dbdriver/postgres"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	sql.Open(<span class="string">"postgres"</span>, <span class="string">"mydb"</span>)   <span class="comment">//之所以能够使用，是因为postgres中通过init将自身注册到了sql包</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组字面量<br>数组字面量允许声明数组里元素数量同时指定每个元素的值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>&#125;</span><br><span class="line"><span class="comment">// 容量由初始化值的数量决定</span></span><br><span class="line">array := [...]<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>&#125;</span><br><span class="line"><span class="comment">//只初始化部分元素</span></span><br><span class="line">array := [<span class="number">4</span>][<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>: &#123;<span class="number">0</span>: <span class="number">20</span>&#125;, <span class="number">3</span>: &#123;<span class="number">1</span>: <span class="number">41</span>&#125;&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
           
@@ -610,7 +753,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -814,6 +957,19 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
 
 
 
