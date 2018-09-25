@@ -113,10 +113,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="js基础语法">
 <meta property="og:url" content="https://blog.jaxli.com/2018/09/21/js基础语法/index.html">
-<meta property="og:site_name" content="武器大师的演武场">
+<meta property="og:site_name" content="武器大师的备忘录">
 <meta property="og:description" content="Basic js的执行单位为行，一般一行就一个语句，以分号结尾变量 通过var 来生命变量 如果只是声明变量而没有赋值，则该变量的值是undefined JavaScript 是一种动态类型语言，也就是说，变量的类型没有限制，变量可以随时更改类型。 12var a = 1;a = &apos;hello&apos;;  如果使用var重新声明一个已经存在的变量，是无效的  JavaScript 引擎的工作方式是，先解">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-21T09:17:45.000Z">
+<meta property="og:updated_time" content="2018-09-25T01:14:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js基础语法">
 <meta name="twitter:description" content="Basic js的执行单位为行，一般一行就一个语句，以分号结尾变量 通过var 来生命变量 如果只是声明变量而没有赋值，则该变量的值是undefined JavaScript 是一种动态类型语言，也就是说，变量的类型没有限制，变量可以随时更改类型。 12var a = 1;a = &apos;hello&apos;;  如果使用var重新声明一个已经存在的变量，是无效的  JavaScript 引擎的工作方式是，先解">
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>js基础语法 | 武器大师的演武场</title>
+  <title>js基础语法 | 武器大师的备忘录</title>
   
 
 
@@ -194,7 +194,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">武器大师的演武场</span>
+        <span class="site-title">武器大师的备忘录</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -286,11 +286,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jax Li">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/jax.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的演武场">
+      <meta itemprop="name" content="武器大师的备忘录">
     </span>
 
     
@@ -323,12 +323,24 @@
                 
               
 
-              <time title="Created: 2018-09-21 10:43:53 / Modified: 17:17:45" itemprop="dateCreated datePublished" datetime="2018-09-21T10:43:53+08:00">2018-09-21</time>
+              <time title="Created: 2018-09-21 10:43:53" itemprop="dateCreated datePublished" datetime="2018-09-21T10:43:53+08:00">2018-09-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-25 09:14:03" itemprop="dateModified" datetime="2018-09-25T09:14:03+08:00">2018-09-25</time>
               
             
           </span>
@@ -380,10 +392,13 @@
 </li>
 <li><p>如果使用var重新声明一个已经存在的变量，是无效的</p>
 </li>
-<li>JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<li><p>JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码首先使用console.log方法，在控制台（console）显示变量a的值。这时变量a还没有声明和赋值，所以这是一种错误的做法，但是实际上不会报错。因为存在变量提升，真正运行的是下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>上面代码首先使用console.log方法，在控制台（console）显示变量a的值。这时变量a还没有声明和赋值，所以这是一种错误的做法，但是实际上不会报错。因为存在变量提升，真正运行的是下面的代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">console.log(a);</span><br><span class="line">a = 1;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -490,6 +505,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/jax.png"
+                alt="Jax Li" />
             
               <p class="site-author-name" itemprop="name">Jax Li</p>
               <p class="site-description motion-element" itemprop="description"></p>
