@@ -37,6 +37,8 @@
 
 
 
+  <meta name="google-site-verification" content="oN_XqJuyP2mi7Q1xlMfXieFowZWarX3q2BvAc0CC0iA" />
+
 
 
 
@@ -108,15 +110,18 @@
 
 
 
-  <meta name="keywords" content="SQLite">
+  <meta name="description" content="CREATE TABLE COMPANY(   ID INT PRIMARY KEY     NOT NULL,   NAME           TEXT    NOT NULL,   AGE            INT     NOT NULL,   ADDRESS        CHAR(50),   SALARY         REAL    DEFAULT 50000.00); IN">
+<meta name="keywords" content="SQLite">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQLite Memo">
 <meta property="og:url" content="https://blog.jaxli.com/2018/09/27/SQLite-Memo/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
+<meta property="og:description" content="CREATE TABLE COMPANY(   ID INT PRIMARY KEY     NOT NULL,   NAME           TEXT    NOT NULL,   AGE            INT     NOT NULL,   ADDRESS        CHAR(50),   SALARY         REAL    DEFAULT 50000.00); IN">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-27T03:13:52.000Z">
+<meta property="og:updated_time" content="2018-09-28T01:35:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQLite Memo">
+<meta name="twitter:description" content="CREATE TABLE COMPANY(   ID INT PRIMARY KEY     NOT NULL,   NAME           TEXT    NOT NULL,   AGE            INT     NOT NULL,   ADDRESS        CHAR(50),   SALARY         REAL    DEFAULT 50000.00); IN">
 
 
 
@@ -225,6 +230,22 @@
         
         
           
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
@@ -320,12 +341,24 @@
                 
               
 
-              <time title="Created: 2018-09-27 11:13:21 / Modified: 11:13:52" itemprop="dateCreated datePublished" datetime="2018-09-27T11:13:21+08:00">2018-09-27</time>
+              <time title="Created: 2018-09-27 11:13:21" itemprop="dateCreated datePublished" datetime="2018-09-27T11:13:21+08:00">2018-09-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-28 09:35:43" itemprop="dateModified" datetime="2018-09-28T09:35:43+08:00">2018-09-28</time>
               
             
           </span>
@@ -368,7 +401,25 @@
       
 
       
-        
+        <p>CREATE TABLE COMPANY(<br>   ID INT PRIMARY KEY     NOT NULL,<br>   NAME           TEXT    NOT NULL,<br>   AGE            INT     NOT NULL,<br>   ADDRESS        CHAR(50),<br>   SALARY         REAL    DEFAULT 50000.00<br>);</p>
+<p>INSERT into COMPANY VALUES (1, ‘Paul’, 32, ‘California’, 20000)<br>INSERT into COMPANY VALUES (2, ‘Allen’, 25, ‘Texas’, 15000)<br>INSERT into COMPANY VALUES (3, ‘Teddy’, 23, ‘Norway’, 20000)<br>INSERT into COMPANY VALUES (4, ‘Mark’, 25, ‘Rich-Mond’, 65000);<br>INSERT into COMPANY VALUES (5, ‘David’, 27, ‘Texas’, 20000);<br>INSERT into COMPANY VALUES (6, ‘Kim’, 22, ‘South-Hall’, 45000);<br>INSERT into COMPANY VALUES (7, ‘James’, 24, ‘Houston’, 20000);</p>
+<p>CREATE TABLE DEPARTMENT(<br>   ID INT PRIMARY KEY      NOT NULL,<br>   DEPT           CHAR(50) NOT NULL,<br>   EMP_ID         INT      NOT NULL<br>);</p>
+<p>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)<br>VALUES (1, ‘IT Billing’, 1 );</p>
+<p>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)<br>VALUES (2, ‘Engineering’, 2 );</p>
+<p>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)<br>VALUES (3, ‘Finance’, 7 );</p>
+<p>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID) VALUES (4, ‘Engineering’, 3 );<br>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID) VALUES (5, ‘Finance’, 4 );<br>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID) VALUES (6, ‘Engineering’, 5 );<br>INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID) VALUES (7, ‘Finance’, 6 );</p>
+<hr>
+<p>select EMP_ID, NAME, DEPT from COMPANY cross join DEPARTMENT;</p>
+<p>select EMP_ID, NAME, DEPT from COMPANY inner join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID;</p>
+<p>select EMP_ID, NAME, DEPT from COMPANY left OUTER join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID;</p>
+<p>select EMP_ID, NAME, DEPT from COMPANY inner join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID union select EMP_ID, NAME, DEPT from COMPANY left OUTER join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID;</p>
+<p>select EMP_ID, NAME, DEPT from COMPANY inner join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID union all select EMP_ID, NAME, DEPT from COMPANY left OUTER join DEPARTMENT on COMPANY.ID = DEPARTMENT.EMP_ID;</p>
+<hr>
+<p>CREATE TABLE AUDIT(<br>    EMP_ID INT NOT NULL,<br>    ENTRY_DATE TEXT NOT NULL<br>);</p>
+<p>———触发器——<br>create trigger audit_log after insert on COMPANY<br>begin<br>    insert into AUDIT(EMP_ID, ENTRY_DATE) VALUES (new.ID, datetime(‘now’));<br>end</p>
+<p>INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (8, ‘Paul’, 32, ‘California’, 20000.00 );</p>
+<p>select * from sqlite_master where type=’trigger’;</p>
+
       
     </div>
 
@@ -493,7 +544,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -506,7 +557,7 @@
                     
                     <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
-                  
+                  </a>
                 </div>
               
             </nav>
