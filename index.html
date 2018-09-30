@@ -349,7 +349,7 @@
                 
               
 
-              <time title="创建时间：2018-09-30 20:38:33 / 修改时间：21:19:45" itemprop="dateCreated datePublished" datetime="2018-09-30T20:38:33+08:00">2018-09-30</time>
+              <time title="创建时间：2018-09-30 20:38:33 / 修改时间：21:23:32" itemprop="dateCreated datePublished" datetime="2018-09-30T20:38:33+08:00">2018-09-30</time>
             
 
             
@@ -508,7 +508,7 @@
                 
               
 
-              <time title="创建时间：2018-09-30 15:48:10 / 修改时间：18:20:59" itemprop="dateCreated datePublished" datetime="2018-09-30T15:48:10+08:00">2018-09-30</time>
+              <time title="创建时间：2018-09-30 15:48:10 / 修改时间：21:25:56" itemprop="dateCreated datePublished" datetime="2018-09-30T15:48:10+08:00">2018-09-30</time>
             
 
             
@@ -560,9 +560,9 @@
           
             <p>Python对象的方法定义可以有三种形式： @classmethod 装饰的类方法、@staticmethod 装饰的静态方法以及不带装饰器的实例方法。本文列出了它们的区别。<br>先看一个示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m1</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        print(<span class="string">"self:"</span>, self)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m2</span><span class="params">(cls, n)</span>:</span></span><br><span class="line">        print(<span class="string">"cls:"</span>, cls)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m3</span><span class="params">(n)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(<span class="number">1</span>) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(<span class="number">1</span>) <span class="comment"># cls: &lt;class '__main__.A'&gt;</span></span><br><span class="line">A.m3(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>m1 是实例方法，第一个参数是self（约定俗称，某些情况会是cls）<br>调用m1使用的a是实例对象，调用时会自动把对象传递给self进行绑定</li>
-<li>m2 是类方法，第一个参数是cls（约定俗称，某些情况会是mcs）<br>调用时会自动</li>
-<li>m3 是静态方法，参数可有可无</li>
+<li>m1 是实例方法，第一个参数是self<br>调用m1使用的a是实例对象，调用时会自动把对象传递给self进行绑定</li>
+<li>m2 是类方法，第一个参数是cls<br>调用时会自动讲class作为参数传递给cls进行绑定</li>
+<li>m3 是静态方法，参数可有可无<br>适用于包含在类内但与类元素无关的方法</li>
 </ul>
 
           
@@ -2047,6 +2047,10 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
+                    
+                      
                     
                       
                     
