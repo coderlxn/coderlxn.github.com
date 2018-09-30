@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -86,7 +86,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -117,8 +117,8 @@
 <meta property="og:url" content="https://blog.jaxli.com/2018/09/25/SQLite高级语法/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
 <meta property="og:description" content="约束 NOT NULL         确保某列不能有NULL值 DEFAULT        当某列没有指定值时，为该列提供默认值 UNIQUE        某列中所有值是不同的 PRIMARY KEY     唯一标志数据库各行 CHECK            确保某列所有值满足一定条件  JOINJOIN子句用于结合两个或多个数据库中表的记录。JOIN是一种通过共同值来结合两个表中字段的">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-27T02:34:57.000Z">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-28T06:08:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQLite高级语法">
 <meta name="twitter:description" content="约束 NOT NULL         确保某列不能有NULL值 DEFAULT        当某列没有指定值时，为该列提供默认值 UNIQUE        某列中所有值是不同的 PRIMARY KEY     唯一标志数据库各行 CHECK            确保某列所有值满足一定条件  JOINJOIN子句用于结合两个或多个数据库中表的记录。JOIN是一种通过共同值来结合两个表中字段的">
@@ -178,7 +178,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -201,10 +201,14 @@
       </a>
     </div>
     
+      
+        <p class="site-subtitle">胜无以言得，败无以言免</p>
+      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -224,7 +228,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
         
         
@@ -232,7 +236,7 @@
           
           <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
   </li>
         
         
@@ -240,7 +244,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
   </li>
         
         
@@ -248,16 +252,13 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
 
       
       
     </ul>
   
-
-  
-    
 
   
 
@@ -279,6 +280,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -303,7 +307,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="武器大师的备忘录">
       <meta itemprop="image" content="/images/jax.png">
     </span>
 
@@ -334,14 +338,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Created: 2018-09-25 14:19:05" itemprop="dateCreated datePublished" datetime="2018-09-25T14:19:05+08:00">2018-09-25</time>
+              <time title="创建时间：2018-09-25 14:19:05" itemprop="dateCreated datePublished" datetime="2018-09-25T14:19:05+08:00">2018-09-25</time>
             
 
             
@@ -356,9 +360,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">更新于</span>
                 
-                <time title="Modified: 2018-09-27 10:34:57" itemprop="dateModified" datetime="2018-09-27T10:34:57+08:00">2018-09-27</time>
+                <time title="修改时间：2018-09-28 14:08:08" itemprop="dateModified" datetime="2018-09-28T14:08:08+08:00">2018-09-28</time>
               
             
           </span>
@@ -373,7 +377,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/09/25/SQLite高级语法/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/25/SQLite高级语法/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/25/SQLite高级语法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -431,7 +435,7 @@
 <li>BEFORE 或 AFTER 关键字决定何时执行触发器动作，决定是在关联行的插入、修改或删除之前或者之后执行触发器动作。</li>
 <li>当触发器相关联的表删除时，自动删除触发器（Trigger）。</li>
 <li>要修改的表必须存在于同一数据库中，作为触发器被附加的表或视图，且必须只使用 tablename，而不是 database.tablename。</li>
-<li>一个特殊的 SQL 函数 RAISE() 可用于触发器程序内抛出异常。</li>
+<li>一个特殊的 SQL 函数 RAISE() 可用于触发器程序内抛出异常。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create trigger audit_log after insert on COMPANY</span><br><span class="line">begin</span><br><span class="line">	insert into AUDIT(EMP_ID, ENTRY_DATE) VALUES (new.ID, datetime(&apos;now&apos;));</span><br><span class="line">end</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -528,10 +532,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -545,7 +549,7 @@
                 alt="Jax Li" />
             
               <p class="site-author-name" itemprop="name">Jax Li</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">武器大师的备忘录</p>
           </div>
 
           
@@ -556,7 +560,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
@@ -578,8 +582,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
               
@@ -662,7 +668,7 @@
 
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -670,7 +676,7 @@
 
 
 
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
 
 
 
@@ -762,6 +768,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
