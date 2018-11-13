@@ -110,25 +110,25 @@
 
 
 
-  <meta name="description" content="RabbitMQ web控制台无法登录http://localhost:15672/api/whoami 提示400错误。原因是浏览器缓存问题后台错误提示Malformed header. Please consult the relevant specification. 安装Docker版1docker run -d --name rabbitmq --publish 5671:5671  -">
-<meta name="keywords" content="RabbitMQ">
+  <meta name="description" content="Qt中的多线程和锁如果有多个线程共用一个Mutex，在同时访问这个Mutex的时候，只有一个线程可以获得所有权，其他的线程会被挂起，直到前面的线程放弃Mutex的所有权。一个示例程序1234567891011121314151617//runobject.h#include &amp;lt;QObject&amp;gt;class RunObject : public QObject&amp;#123;    Q_OBJ">
+<meta name="keywords" content="Qt,MultiThread">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RabbitMQ">
-<meta property="og:url" content="https://blog.jaxli.com/2018/10/19/RabbitMQ/index.html">
+<meta property="og:title" content="MultiThread and Mutex in Qt">
+<meta property="og:url" content="https://blog.jaxli.com/2018/11/13/MultiThread-and-Mutex-in-Qt/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
-<meta property="og:description" content="RabbitMQ web控制台无法登录http://localhost:15672/api/whoami 提示400错误。原因是浏览器缓存问题后台错误提示Malformed header. Please consult the relevant specification. 安装Docker版1docker run -d --name rabbitmq --publish 5671:5671  -">
+<meta property="og:description" content="Qt中的多线程和锁如果有多个线程共用一个Mutex，在同时访问这个Mutex的时候，只有一个线程可以获得所有权，其他的线程会被挂起，直到前面的线程放弃Mutex的所有权。一个示例程序1234567891011121314151617//runobject.h#include &amp;lt;QObject&amp;gt;class RunObject : public QObject&amp;#123;    Q_OBJ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-19T11:09:59.000Z">
+<meta property="og:updated_time" content="2018-11-13T02:47:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RabbitMQ">
-<meta name="twitter:description" content="RabbitMQ web控制台无法登录http://localhost:15672/api/whoami 提示400错误。原因是浏览器缓存问题后台错误提示Malformed header. Please consult the relevant specification. 安装Docker版1docker run -d --name rabbitmq --publish 5671:5671  -">
+<meta name="twitter:title" content="MultiThread and Mutex in Qt">
+<meta name="twitter:description" content="Qt中的多线程和锁如果有多个线程共用一个Mutex，在同时访问这个Mutex的时候，只有一个线程可以获得所有权，其他的线程会被挂起，直到前面的线程放弃Mutex的所有权。一个示例程序1234567891011121314151617//runobject.h#include &amp;lt;QObject&amp;gt;class RunObject : public QObject&amp;#123;    Q_OBJ">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.jaxli.com/2018/10/19/RabbitMQ/"/>
+  <link rel="canonical" href="https://blog.jaxli.com/2018/11/13/MultiThread-and-Mutex-in-Qt/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>RabbitMQ | 武器大师的备忘录</title>
+  <title>MultiThread and Mutex in Qt | 武器大师的备忘录</title>
   
 
 
@@ -303,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/10/19/RabbitMQ/">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/13/MultiThread-and-Mutex-in-Qt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jax Li">
@@ -320,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RabbitMQ
+          <h1 class="post-title" itemprop="name headline">MultiThread and Mutex in Qt
               
             
           </h1>
@@ -345,7 +345,7 @@
                 
               
 
-              <time title="创建时间：2018-10-19 19:02:20 / 修改时间：19:09:59" itemprop="dateCreated datePublished" datetime="2018-10-19T19:02:20+08:00">2018-10-19</time>
+              <time title="创建时间：2018-11-13 10:29:43 / 修改时间：10:47:38" itemprop="dateCreated datePublished" datetime="2018-11-13T10:29:43+08:00">2018-11-13</time>
             
 
             
@@ -364,8 +364,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/19/RabbitMQ/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/19/RabbitMQ/" itemprop="commentCount"></span>
+                <a href="/2018/11/13/MultiThread-and-Mutex-in-Qt/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/13/MultiThread-and-Mutex-in-Qt/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,9 +393,16 @@
       
 
       
-        <h4 id="RabbitMQ-web控制台无法登录"><a href="#RabbitMQ-web控制台无法登录" class="headerlink" title="RabbitMQ web控制台无法登录"></a>RabbitMQ web控制台无法登录</h4><p><a href="http://localhost:15672/api/whoami" target="_blank" rel="noopener">http://localhost:15672/api/whoami</a> 提示400错误。原因是浏览器缓存问题<br>后台错误提示<code>Malformed header. Please consult the relevant specification.</code></p>
-<h4 id="安装Docker版"><a href="#安装Docker版" class="headerlink" title="安装Docker版"></a>安装Docker版</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbitmq --publish 5671:5671  --publish 5672:5672 --publish 4369:4369 --publish 25672:25672 --publish 15671:15671 --publish 15672:15672 rabbitmq:management</span><br></pre></td></tr></table></figure>
-<p>web控制台在端口<code>15672</code></p>
+        <h4 id="Qt中的多线程和锁"><a href="#Qt中的多线程和锁" class="headerlink" title="Qt中的多线程和锁"></a>Qt中的多线程和锁</h4><p>如果有多个线程共用一个Mutex，在同时访问这个Mutex的时候，只有一个线程可以获得所有权，其他的线程会被挂起，直到前面的线程放弃Mutex的所有权。<br>一个示例程序<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//runobject.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunObject</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">RunObject</span><span class="params">(QObject *parent = <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">startRunAndLock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QString m_uuid;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//runobject.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"runobject.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMutexLocker&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QUuid&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QThread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line">QMutex global_mutex;</span><br><span class="line"></span><br><span class="line">RunObject::RunObject(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line">    m_uuid = QUuid().createUuid().toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> RunObject::startRunAndLock()</span><br><span class="line">&#123;</span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" before get mutext"</span>;</span><br><span class="line">    <span class="function">QMutexLocker <span class="title">locker</span><span class="params">(&amp;global_mutex)</span></span>;</span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" now get mutext"</span>;</span><br><span class="line"></span><br><span class="line">    QThread::currentThread()-&gt;sleep(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" after long time work, release mutex"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QThread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMetaObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"runobject.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    RunObject obj1;</span><br><span class="line">    RunObject obj2;</span><br><span class="line">    RunObject obj3;</span><br><span class="line"></span><br><span class="line">    QThread thread1;</span><br><span class="line">    QThread thread2;</span><br><span class="line">    QThread thread3;</span><br><span class="line"></span><br><span class="line">    thread1.start();</span><br><span class="line">    thread2.start();</span><br><span class="line">    thread3.start();</span><br><span class="line"></span><br><span class="line">    obj1.moveToThread(&amp;thread1);</span><br><span class="line">    obj2.moveToThread(&amp;thread2);</span><br><span class="line">    obj3.moveToThread(&amp;thread3);</span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"start multi jobs"</span>;</span><br><span class="line"></span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj1, <span class="string">"startRunAndLock"</span>);</span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj2, <span class="string">"startRunAndLock"</span>);</span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj3, <span class="string">"startRunAndLock"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">start multi jobs</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  after long time work, release mutex</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  after long time work, release mutex</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  after long time work, release mutex</span><br></pre></td></tr></table></figure></p>
+<p>可以看出现在是等一个线程工作完成之后，下个线程才开始工作</p>
+<h4 id="扩展Mutex"><a href="#扩展Mutex" class="headerlink" title="扩展Mutex"></a>扩展Mutex</h4><ul>
+<li><code>QMutex</code>中有一个<code>tryLock(int timeout = 0)</code>方法，会尝试获得Mutex的所有权，成功则返回true，否则返回false。如果timeout为负数，则和<code>lock()</code>方法是等效的。</li>
+<li>QLockFile 在多个线程或进程中锁定文件。</li>
+<li>QReadWriteLock，读写锁，允许多个只读用户同时存在，但写只能存在一个。</li>
+</ul>
 
       
     </div>
@@ -445,7 +452,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
+            <a href="/tags/Qt/" rel="tag"># Qt</a>
+          
+            <a href="/tags/MultiThread/" rel="tag"># MultiThread</a>
           
         </div>
       
@@ -458,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/16/《流畅的Python》笔记/" rel="next" title="《流畅的Python》笔记">
-                <i class="fa fa-chevron-left"></i> 《流畅的Python》笔记
+              <a href="/2018/11/02/Docker常见问题/" rel="next" title="Docker常见问题">
+                <i class="fa fa-chevron-left"></i> Docker常见问题
               </a>
             
           </div>
@@ -467,10 +476,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/01/Unicode与UTF-8/" rel="prev" title="Unicode与UTF-8">
-                Unicode与UTF-8 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -636,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RabbitMQ-web控制台无法登录"><span class="nav-number">1.</span> <span class="nav-text">RabbitMQ web控制台无法登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Docker版"><span class="nav-number">2.</span> <span class="nav-text">安装Docker版</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Qt中的多线程和锁"><span class="nav-number">1.</span> <span class="nav-text">Qt中的多线程和锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展Mutex"><span class="nav-number">2.</span> <span class="nav-text">扩展Mutex</span></a></li></ol></div>
             
 
           </div>
