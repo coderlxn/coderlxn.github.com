@@ -303,6 +303,210 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/09/25/Go语言类型系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/Go语言类型系统/" itemprop="url">
+                  Go语言类型系统
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-25 20:07:45" itemprop="dateCreated datePublished" datetime="2018-09-25T20:07:45+08:00">2018-09-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-28 14:00:07" itemprop="dateModified" datetime="2018-09-28T14:00:07+08:00">2018-09-28</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/25/Go语言类型系统/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/25/Go语言类型系统/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>任何时候，创建一个变量并初始化为其零值，习惯是使用关键字 var。这种用法是为了更明确地表示一个变量被设置为零值。如果变量被初始化为某个非零值，就配合结构字面量和短变量声明操作符来创建变量。</li>
+<li><p>使用结构字面量生命一个结构类型的变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> user <span class="keyword">struct</span> &#123;</span><br><span class="line">	name		<span class="keyword">string</span></span><br><span class="line">	email		<span class="keyword">string</span></span><br><span class="line">	ext			<span class="keyword">int</span></span><br><span class="line">	privileged <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lisa := user &#123;</span><br><span class="line">	name:		<span class="string">"Lisa"</span>,</span><br><span class="line">	email:		<span class="string">"lisa@email.com"</span>,</span><br><span class="line">	ext:			<span class="number">123</span>,</span><br><span class="line">	privileged: <span class="literal">true</span>,    <span class="comment">//最后一个也要有逗号</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">james := user&#123;<span class="string">"James"</span>, <span class="string">"james@email.com"</span>, <span class="number">123</span>, <span class="literal">true</span>&#125;  <span class="comment">//每个值也可以分别占一行，不过习惯上这种形式会写在一行里，结尾不需要逗号。必须和结构声明中字段的顺序一致</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扩展新的结构类型</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> admin <span class="keyword">struct</span> &#123;</span><br><span class="line">	person user</span><br><span class="line">	level <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建变量</span></span><br><span class="line">fred := admin &#123;</span><br><span class="line">	person: user&#123;</span><br><span class="line">		name:		<span class="string">"Lisa"</span>,</span><br><span class="line">		email:		<span class="string">"lisa@email.com"</span>,</span><br><span class="line">		ext:			<span class="number">123</span>,</span><br><span class="line">		privileged:	<span class="literal">true</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">	level: <span class="string">"super"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以基于已有类型来声明新的类型，但这两个类型是不同的类型</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译错误</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Duration <span class="keyword">int64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> dur Duration</span><br><span class="line">	dur = <span class="keyword">int64</span>(<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法可以给用户定义的类型添加新行为，实际也是函数，只是在声明时，关键字func和方法名之间增加了一个参数</p>
+<ul>
+<li>值接收者，使用值接收者声明方法，调用时会使用这个值的副本来执行</li>
+<li>指针接收者，使用指针接收者声明的方法，调用时会使用这个值的来执行<br>不管值还是指针都可以调用上述两种方法，只是在调用的时候才会做副本拷贝或直接访问指针</li>
+</ul>
+</li>
+<li>引用类型<br>切片、映射、通道、接口、函数。当声明这些变量时，创建的变量被称作标头值，是为复制设计的，方便共享底层数据</li>
+<li>方法集<br>方法集定义了一组关联到给定类型的值或者指针的方法。定义方法时使用的接收者的类型决定了这个方法是关联到值，还是关联到指针，还是两个都关联。<br>从接收者类型的角度来看方法集</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Methods Receivers</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(t T)</td>
+<td>T and *T</td>
+</tr>
+<tr>
+<td>(t *T)</td>
+<td>*T</td>
+</tr>
+</tbody>
+</table>
+<p>这个规则说，如果使用指针接收者来实现一个接口，那么只有指向那个类型的指针才能够实现对应的接口。如果使用值接收者来实现一个接口，那么那个类型的值和指针都能够实现对应的接口。<br>为什么会有这种限制？事实上，编译器并不是总能自动获得一个值的地址</p>
+<ul>
+<li>嵌入类型  — 和继承类似<br>嵌入类型是将已有的类型直接声明在新的结构类型里。被嵌入的类型被称为新的外部类型的内部类型。<br>通过嵌入类型，与内部类型相关的标识符会提升到外部类型上。这些被提升的标识符就像直接声明在外部类型里的标识符一样，也是外部类型的一部分。这样外部类型就组合了内部类型包含的所有属性，并且可以添加新的字段和方法。外部类型也可以通过声明与内部类型标识符同名的标识符来覆盖内部标识符的字段或者方法。这就是扩展或者修改已有类型的方法。<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> notifier <span class="keyword">interface</span> &#123;</span><br><span class="line">	notify()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> user <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	email <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u *user)</span> <span class="title">notify</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"Sending user email to %s&lt;%s&gt;\n"</span>, u.name, u.email)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> admin <span class="keyword">struct</span> &#123;</span><br><span class="line">	user</span><br><span class="line">	level <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *admin)</span> <span class="title">notify</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"Sending admin email to %s&lt;%s&gt;\n"</span>, a.name, a.email)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	ad := admin&#123;</span><br><span class="line">		user&#123;</span><br><span class="line">			name: <span class="string">"john smith"</span>,</span><br><span class="line">			email: <span class="string">"john@yahoo.com"</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="string">"super"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	sendNotification(&amp;ad)</span><br><span class="line"></span><br><span class="line">	ad.user.notify()</span><br><span class="line"></span><br><span class="line">	ad.notify()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sendNotification</span><span class="params">(n notifier)</span></span>  &#123;</span><br><span class="line">	n.notify()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/09/25/SQLite高级语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1535,7 +1739,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1574,7 +1778,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
