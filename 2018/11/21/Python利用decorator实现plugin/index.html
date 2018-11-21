@@ -110,25 +110,25 @@
 
 
 
-  <meta name="description" content="Python对象的方法定义可以有三种形式： @classmethod 装饰的类方法、@staticmethod 装饰的静态方法以及不带装饰器的实例方法。本文列出了它们的区别。先看一个示例12345678910111213141516class A(object):    def m1(self, n):        print(&quot;self:&quot;, self)    @classmethod">
+  <meta name="description" content="插件模式应该有的一个基本功能就是扩展简单，在扩展的时候只需要按照固定的格式开发自己的内容，然后插件系统自动的去发现和加载插件进入系统中。  注册机制在开发的插件时向插件系统进行注册，但又要求不能修改现有的代码，这个和decorator的功能非常相似。所以首先考虑通过decorator来提供插件的注册机制，在开发插件的时候默认像插件系统进行注册。12345678# registry.pyREGIST">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="staticmethod和classmethod">
-<meta property="og:url" content="https://blog.jaxli.com/2018/09/30/staticmethod和classmethod/index.html">
+<meta property="og:title" content="Python利用decorator实现plugin">
+<meta property="og:url" content="https://blog.jaxli.com/2018/11/21/Python利用decorator实现plugin/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
-<meta property="og:description" content="Python对象的方法定义可以有三种形式： @classmethod 装饰的类方法、@staticmethod 装饰的静态方法以及不带装饰器的实例方法。本文列出了它们的区别。先看一个示例12345678910111213141516class A(object):    def m1(self, n):        print(&quot;self:&quot;, self)    @classmethod">
+<meta property="og:description" content="插件模式应该有的一个基本功能就是扩展简单，在扩展的时候只需要按照固定的格式开发自己的内容，然后插件系统自动的去发现和加载插件进入系统中。  注册机制在开发的插件时向插件系统进行注册，但又要求不能修改现有的代码，这个和decorator的功能非常相似。所以首先考虑通过decorator来提供插件的注册机制，在开发插件的时候默认像插件系统进行注册。12345678# registry.pyREGIST">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-30T13:25:56.000Z">
+<meta property="og:updated_time" content="2018-11-21T08:33:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="staticmethod和classmethod">
-<meta name="twitter:description" content="Python对象的方法定义可以有三种形式： @classmethod 装饰的类方法、@staticmethod 装饰的静态方法以及不带装饰器的实例方法。本文列出了它们的区别。先看一个示例12345678910111213141516class A(object):    def m1(self, n):        print(&quot;self:&quot;, self)    @classmethod">
+<meta name="twitter:title" content="Python利用decorator实现plugin">
+<meta name="twitter:description" content="插件模式应该有的一个基本功能就是扩展简单，在扩展的时候只需要按照固定的格式开发自己的内容，然后插件系统自动的去发现和加载插件进入系统中。  注册机制在开发的插件时向插件系统进行注册，但又要求不能修改现有的代码，这个和decorator的功能非常相似。所以首先考虑通过decorator来提供插件的注册机制，在开发插件的时候默认像插件系统进行注册。12345678# registry.pyREGIST">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.jaxli.com/2018/09/30/staticmethod和classmethod/"/>
+  <link rel="canonical" href="https://blog.jaxli.com/2018/11/21/Python利用decorator实现plugin/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>staticmethod和classmethod | 武器大师的备忘录</title>
+  <title>Python利用decorator实现plugin | 武器大师的备忘录</title>
   
 
 
@@ -303,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/09/30/staticmethod和classmethod/">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/21/Python利用decorator实现plugin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jax Li">
@@ -320,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">staticmethod和classmethod
+          <h1 class="post-title" itemprop="name headline">Python利用decorator实现plugin
               
             
           </h1>
@@ -345,7 +345,7 @@
                 
               
 
-              <time title="创建时间：2018-09-30 15:48:10 / 修改时间：21:25:56" itemprop="dateCreated datePublished" datetime="2018-09-30T15:48:10+08:00">2018-09-30</time>
+              <time title="创建时间：2018-11-21 16:05:24 / 修改时间：16:33:58" itemprop="dateCreated datePublished" datetime="2018-11-21T16:05:24+08:00">2018-11-21</time>
             
 
             
@@ -364,8 +364,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/30/staticmethod和classmethod/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/30/staticmethod和classmethod/" itemprop="commentCount"></span>
+                <a href="/2018/11/21/Python利用decorator实现plugin/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/21/Python利用decorator实现plugin/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,11 +393,20 @@
       
 
       
-        <p>Python对象的方法定义可以有三种形式： @classmethod 装饰的类方法、@staticmethod 装饰的静态方法以及不带装饰器的实例方法。本文列出了它们的区别。<br>先看一个示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m1</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        print(<span class="string">"self:"</span>, self)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m2</span><span class="params">(cls, n)</span>:</span></span><br><span class="line">        print(<span class="string">"cls:"</span>, cls)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">m3</span><span class="params">(n)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(<span class="number">1</span>) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(<span class="number">1</span>) <span class="comment"># cls: &lt;class '__main__.A'&gt;</span></span><br><span class="line">A.m3(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+        <p>插件模式应该有的一个基本功能就是扩展简单，在扩展的时候只需要按照固定的格式开发自己的内容，然后插件系统自动的去发现和加载插件进入系统中。</p>
 <ul>
-<li>m1 是实例方法，第一个参数是self<br>调用m1使用的a是实例对象，调用时会自动把对象传递给self进行绑定</li>
-<li>m2 是类方法，第一个参数是cls<br>调用时会自动讲class作为参数传递给cls进行绑定</li>
-<li>m3 是静态方法，参数可有可无<br>适用于包含在类内但与类元素无关的方法</li>
+<li>注册机制<br>在开发的插件时向插件系统进行注册，但又要求不能修改现有的代码，这个和decorator的功能非常相似。所以首先考虑通过decorator来提供插件的注册机制，在开发插件的时候默认像插件系统进行注册。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># registry.py</span></span><br><span class="line">REGISTERED_CLASSED = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">registered_class</span><span class="params">(cls)</span>:</span></span><br><span class="line">    REGISTERED_CLASSED.append(cls)</span><br><span class="line">    print(<span class="string">"Class &#123;&#125; registered"</span>.format(cls))</span><br><span class="line">    <span class="keyword">return</span> cls</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样在开发的时候需要添加一个registered_class的装饰器即可<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plugina.py</span></span><br><span class="line"><span class="keyword">from</span> .abstractplugin <span class="keyword">import</span> AbstractPlugin</span><br><span class="line"><span class="keyword">from</span> .classregistry <span class="keyword">import</span> registered_class</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@registered_class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PluginA</span><span class="params">(AbstractPlugin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Plugin A init"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Plugin A run"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这样在导入插件模块的时候会将插件注册到插件列表中。<br>另外的一个问题就是现在必须要明确的导入插件文件才会触发decorator的运行，最好的情况是只需要将插件文件放到指定目录下就会自动的进行进行导入并注册。</p>
+<ul>
+<li>自动导入<br>通过importlib可以实现模块的导入功能，可以在运行时通过importlib将插件的模块导入来触发插件的注册。<br>在插件package的<strong>init</strong>.py文件中变量当前的所有文件并依次进行导入。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># __init__.py</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"><span class="keyword">from</span> .classregistry <span class="keyword">import</span> REGISTERED_CLASSED</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> basename, dirname, join</span><br><span class="line"><span class="keyword">from</span> glob <span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line">pwd = dirname(__file__)</span><br><span class="line">lst = glob(join(pwd, <span class="string">"*.py"</span>))</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> lst:</span><br><span class="line">    file_name = basename(x)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> file_name.startswith(<span class="string">"__"</span>):</span><br><span class="line">        importlib.import_module(<span class="string">".&#123;&#125;"</span>.format(file_name[:<span class="number">-3</span>]), __package__)</span><br><span class="line"></span><br><span class="line">__all__ = [<span class="string">"REGISTERED_CLASSED"</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>通过<strong>all</strong>来限制外部的访问</p>
+<ul>
+<li>其他问题<br>在相对路径导入的时候，需要提供package的名称，并且要主要package的相对地址</li>
 </ul>
 
       
@@ -461,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/30/Python3插件化框架/" rel="next" title="Python3插件化框架">
-                <i class="fa fa-chevron-left"></i> Python3插件化框架
+              <a href="/2018/11/19/Shell问题收集/" rel="next" title="Shell问题收集">
+                <i class="fa fa-chevron-left"></i> Shell问题收集
               </a>
             
           </div>
@@ -470,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/30/Python中的元类/" rel="prev" title="Python中的元类">
-                Python中的元类 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="武器大师的备忘录">
 <meta property="og:description" content="解压可迭代对象赋值给多个变量 1234567891011121314151617records = [    (&apos;foo&apos;, 1, 2),    (&apos;bar&apos;, &apos;hello&apos;),    (&apos;foo&apos;, 3, 4),]def do_foo(x, y):    print(&apos;foo&apos;, x, y)def do_bar(s):    print(&apos;bar&apos;, s)for tag, *args in">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-09T12:01:12.000Z">
+<meta property="og:updated_time" content="2018-11-20T02:44:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python cookbook">
 <meta name="twitter:description" content="解压可迭代对象赋值给多个变量 1234567891011121314151617records = [    (&apos;foo&apos;, 1, 2),    (&apos;bar&apos;, &apos;hello&apos;),    (&apos;foo&apos;, 3, 4),]def do_foo(x, y):    print(&apos;foo&apos;, x, y)def do_bar(s):    print(&apos;bar&apos;, s)for tag, *args in">
@@ -345,12 +345,24 @@
                 
               
 
-              <time title="创建时间：2018-10-09 15:54:23 / 修改时间：20:01:12" itemprop="dateCreated datePublished" datetime="2018-10-09T15:54:23+08:00">2018-10-09</time>
+              <time title="创建时间：2018-10-09 15:54:23" itemprop="dateCreated datePublished" datetime="2018-10-09T15:54:23+08:00">2018-10-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-20 10:44:11" itemprop="dateModified" datetime="2018-11-20T10:44:11+08:00">2018-11-20</time>
               
             
           </span>
@@ -401,7 +413,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">23</span>, <span class="number">7</span>, <span class="number">-4</span>, <span class="number">18</span>, <span class="number">23</span>, <span class="number">42</span>, <span class="number">37</span>, <span class="number">2</span>]</span><br><span class="line">print(heapq.nlargest(<span class="number">3</span>, nums))  <span class="comment"># Prints [42, 37, 23]</span></span><br><span class="line">print(heapq.nsmallest(<span class="number">3</span>, nums))  <span class="comment"># Prints [-4, 1, 2]</span></span><br><span class="line"></span><br><span class="line">portfolio = [</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'IBM'</span>, <span class="string">'shares'</span>: <span class="number">100</span>, <span class="string">'price'</span>: <span class="number">91.1</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'AAPL'</span>, <span class="string">'shares'</span>: <span class="number">50</span>, <span class="string">'price'</span>: <span class="number">543.22</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'FB'</span>, <span class="string">'shares'</span>: <span class="number">200</span>, <span class="string">'price'</span>: <span class="number">21.09</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'HPQ'</span>, <span class="string">'shares'</span>: <span class="number">35</span>, <span class="string">'price'</span>: <span class="number">31.75</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'YHOO'</span>, <span class="string">'shares'</span>: <span class="number">45</span>, <span class="string">'price'</span>: <span class="number">16.35</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'name'</span>: <span class="string">'ACME'</span>, <span class="string">'shares'</span>: <span class="number">75</span>, <span class="string">'price'</span>: <span class="number">115.65</span>&#125;</span><br><span class="line">]</span><br><span class="line">cheap = heapq.nsmallest(<span class="number">3</span>, portfolio, key=<span class="keyword">lambda</span> s: s[<span class="string">'price'</span>])</span><br><span class="line">expensive = heapq.nlargest(<span class="number">3</span>, portfolio, key=<span class="keyword">lambda</span> s: s[<span class="string">'price'</span>])</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查找两字典的相同点<br>为了寻找两个字典的相同点，可以简单的在两字典的 keys() 或者 items() 方法返回结果上执行集合操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;</span><br><span class="line">    <span class="string">'x'</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="string">'y'</span> : <span class="number">2</span>,</span><br><span class="line">    <span class="string">'z'</span> : <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b = &#123;</span><br><span class="line">    <span class="string">'w'</span> : <span class="number">10</span>,</span><br><span class="line">    <span class="string">'x'</span> : <span class="number">11</span>,</span><br><span class="line">    <span class="string">'y'</span> : <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># Find keys in common</span></span><br><span class="line">a.keys() &amp; b.keys() <span class="comment"># &#123; 'x', 'y' &#125;</span></span><br><span class="line"><span class="comment"># Find keys in a that are not in b</span></span><br><span class="line">a.keys() - b.keys() <span class="comment"># &#123; 'z' &#125;</span></span><br><span class="line"><span class="comment"># Find (key,value) pairs in common</span></span><br><span class="line">a.items() &amp; b.items() <span class="comment"># &#123; ('y', 2) &#125;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;</span><br><span class="line">    <span class="string">'x'</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="string">'y'</span> : <span class="number">2</span>,</span><br><span class="line">    <span class="string">'z'</span> : <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b = &#123;</span><br><span class="line">    <span class="string">'w'</span> : <span class="number">10</span>,</span><br><span class="line">    <span class="string">'x'</span> : <span class="number">11</span>,</span><br><span class="line">    <span class="string">'y'</span> : <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># Find keys in common</span></span><br><span class="line">a.keys() &amp; b.keys() <span class="comment"># &#123; 'x', 'y' &#125;</span></span><br><span class="line"><span class="comment"># Find keys in a that are not in b</span></span><br><span class="line">a.keys() - b.keys() <span class="comment"># &#123; 'z' &#125;</span></span><br><span class="line"><span class="comment"># Find (key,value) pairs in common</span></span><br><span class="line">a.items() &amp; b.items() <span class="comment"># &#123; ('y', 2) &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
 </ul>
 
       
@@ -545,7 +559,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
