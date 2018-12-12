@@ -303,6 +303,465 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/12/自建私有的docker仓库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/12/自建私有的docker仓库/" itemprop="url">
+                  自建私有的docker仓库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-12 17:49:59 / 修改时间：18:02:11" itemprop="dateCreated datePublished" datetime="2018-12-12T17:49:59+08:00">2018-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/12/自建私有的docker仓库/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/12/自建私有的docker仓库/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>Ubuntu 16.04</li>
+<li>Docker version 18.09.0<br>Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。<br>所以需要自己新建一个docker仓库，官方已经提供了详细的<a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">说明文档</a>，此处只是坐下简单的总结。<br>首先安装docker-ce，安装<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce" target="_blank" rel="noopener">官网提供的安装方式</a>安装即可。</li>
+</ul>
+<p>可以通过简单的命令在本地建一个仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart=always --name registry registry:2</span><br></pre></td></tr></table></figure></p>
+<p>从命令中可以看出实际是启用了一个docker container来作为服务。<br>如果需要外部访问功能，就需要SSL证书。<br>在默认情况下会新建一个volume来存储docker文件，也可以自己来指定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --name registry \</span><br><span class="line">  -v `<span class="built_in">pwd</span>`/conf:/certs \</span><br><span class="line">  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/web.crt \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_KEY=/certs/web.key \</span><br><span class="line">  -p 443:443 \</span><br><span class="line">  registry</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/11/Python的时间戳覆盖logstash的timestamp问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/Python的时间戳覆盖logstash的timestamp问题/" itemprop="url">
+                  Python的时间戳覆盖Logstash的timestamp问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-11 18:45:50 / 修改时间：18:50:30" itemprop="dateCreated datePublished" datetime="2018-12-11T18:45:50+08:00">2018-12-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/11/Python的时间戳覆盖logstash的timestamp问题/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/11/Python的时间戳覆盖logstash的timestamp问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在将Python的日志导入到Elasticsearch的过程中，要用Logstash进行一次过滤和转换。<br>现在的遇到的一个问题是，timestamp的filter没有效果。原因是Python的时间戳默认使用微秒，而Logstash使用的是毫秒，两个时间的格式是无法匹配的。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/11/Mac命令行生成icns图标/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/Mac命令行生成icns图标/" itemprop="url">
+                  Mac命令行生成icns图标
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-11 14:14:33 / 修改时间：14:55:14" itemprop="dateCreated datePublished" datetime="2018-12-11T14:14:33+08:00">2018-12-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/11/Mac命令行生成icns图标/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/11/Mac命令行生成icns图标/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>创建文件夹’xxx.iconset’</li>
+<li>在xxx.iconset中创建 16X16 到 1024 * 1024尺寸的icon,需要命名为xxx_16x16.png，<a href="mailto:xxx_16x16@2x.png" target="_blank" rel="noopener">xxx_16x16@2x.png</a></li>
+<li>通过明执命令，即可生成icns文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconutil -c icns yum.iconset -o yum.icns</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/10/协程和Python-yield/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1423,479 +1882,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/13/MultiThread-and-Mutex-in-Qt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/13/MultiThread-and-Mutex-in-Qt/" itemprop="url">
-                  MultiThread and Mutex in Qt
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-13 10:29:43 / 修改时间：10:47:38" itemprop="dateCreated datePublished" datetime="2018-11-13T10:29:43+08:00">2018-11-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/13/MultiThread-and-Mutex-in-Qt/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/13/MultiThread-and-Mutex-in-Qt/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Qt中的多线程和锁"><a href="#Qt中的多线程和锁" class="headerlink" title="Qt中的多线程和锁"></a>Qt中的多线程和锁</h4><p>如果有多个线程共用一个Mutex，在同时访问这个Mutex的时候，只有一个线程可以获得所有权，其他的线程会被挂起，直到前面的线程放弃Mutex的所有权。<br>一个示例程序<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//runobject.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunObject</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">RunObject</span><span class="params">(QObject *parent = <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">startRunAndLock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QString m_uuid;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//runobject.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"runobject.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMutexLocker&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QUuid&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QThread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line">QMutex global_mutex;</span><br><span class="line"></span><br><span class="line">RunObject::RunObject(QObject *parent) : QObject(parent)</span><br><span class="line">&#123;</span><br><span class="line">    m_uuid = QUuid().createUuid().toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> RunObject::startRunAndLock()</span><br><span class="line">&#123;</span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" before get mutext"</span>;</span><br><span class="line">    <span class="function">QMutexLocker <span class="title">locker</span><span class="params">(&amp;global_mutex)</span></span>;</span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" now get mutext"</span>;</span><br><span class="line"></span><br><span class="line">    QThread::currentThread()-&gt;sleep(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; m_uuid &lt;&lt; <span class="string">" after long time work, release mutex"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QThread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMetaObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"runobject.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    RunObject obj1;</span><br><span class="line">    RunObject obj2;</span><br><span class="line">    RunObject obj3;</span><br><span class="line"></span><br><span class="line">    QThread thread1;</span><br><span class="line">    QThread thread2;</span><br><span class="line">    QThread thread3;</span><br><span class="line"></span><br><span class="line">    thread1.start();</span><br><span class="line">    thread2.start();</span><br><span class="line">    thread3.start();</span><br><span class="line"></span><br><span class="line">    obj1.moveToThread(&amp;thread1);</span><br><span class="line">    obj2.moveToThread(&amp;thread2);</span><br><span class="line">    obj3.moveToThread(&amp;thread3);</span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"start multi jobs"</span>;</span><br><span class="line"></span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj1, <span class="string">"startRunAndLock"</span>);</span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj2, <span class="string">"startRunAndLock"</span>);</span><br><span class="line">    QMetaObject::invokeMethod(&amp;obj3, <span class="string">"startRunAndLock"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">start multi jobs</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  before get mutext</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;7488acab-e215-4b92-8671-2fb853be89f3&#125;&quot;  after long time work, release mutex</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;c03aab6f-0f2b-4753-8a17-96b1918777cb&#125;&quot;  after long time work, release mutex</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  now get mutext</span><br><span class="line">&quot;&#123;9a26aae0-41b7-4004-a273-24f6b6ae18fe&#125;&quot;  after long time work, release mutex</span><br></pre></td></tr></table></figure></p>
-<p>可以看出现在是等一个线程工作完成之后，下个线程才开始工作</p>
-<h4 id="扩展Mutex"><a href="#扩展Mutex" class="headerlink" title="扩展Mutex"></a>扩展Mutex</h4><ul>
-<li><code>QMutex</code>中有一个<code>tryLock(int timeout = 0)</code>方法，会尝试获得Mutex的所有权，成功则返回true，否则返回false。如果timeout为负数，则和<code>lock()</code>方法是等效的。</li>
-<li>QLockFile 在多个线程或进程中锁定文件。</li>
-<li>QReadWriteLock，读写锁，允许多个只读用户同时存在，但写只能存在一个。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/02/Docker常见问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/Docker常见问题/" itemprop="url">
-                  Docker常见问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-02 10:39:37" itemprop="dateCreated datePublished" datetime="2018-11-02T10:39:37+08:00">2018-11-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-23 10:55:38" itemprop="dateModified" datetime="2018-11-23T10:55:38+08:00">2018-11-23</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/Docker常见问题/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/02/Docker常见问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="docker-save-和-docker-load-丢失tag信息"><a href="#docker-save-和-docker-load-丢失tag信息" class="headerlink" title="docker save 和 docker load 丢失tag信息"></a>docker save 和 docker load 丢失tag信息</h4><p>如果docker save时使用的是hash字段，导出的文件中不会包含tag信息，再次load后会导致tag丢失。<br>可以使用tag名称来导出数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker save xmppclient:6 -o xmppclient.tar</span><br><span class="line"><span class="comment"># 导入时会恢复tag信息</span></span><br><span class="line">docker load -i xmppclient.tar</span><br><span class="line">Loaded image: xmppclient:6</span><br></pre></td></tr></table></figure></p>
-<h4 id="docker-container变更开放端口"><a href="#docker-container变更开放端口" class="headerlink" title="docker container变更开放端口"></a>docker container变更开放端口</h4><p>通过<code>docker run</code>命令创建一个container时，可以指定要放开的端口。在container创建完成后如果要修改开发的端口，则不能直接把端口开放出来。<br>一个可行的方案是通过<code>docker commit</code>将当前的container保存为image，然后在此基础上创建新的container</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/02/通过Bash脚本SSH登录后执行命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/通过Bash脚本SSH登录后执行命令/" itemprop="url">
-                  通过Bash脚本SSH登录后执行命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-02 10:24:36 / 修改时间：10:30:32" itemprop="dateCreated datePublished" datetime="2018-11-02T10:24:36+08:00">2018-11-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/通过Bash脚本SSH登录后执行命令/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/02/通过Bash脚本SSH登录后执行命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在遇到这么一个场景：<br>有一些服务需要部署在服务器上，而且本地机器和目标服务器之间有一个跳板机器。因为有几个服务文件，每次部署的时候需要分别拷贝，非常麻烦，而且容易出错。<br>所以考虑通过Bash脚本来实现。经过一番搜索，发现实现的方式也很简单，基本的语法是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh server &lt;&lt; EOF</span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></p>
-<p>即使中间有跳板级，也只需要再嵌套一层即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取git的提交次数</span></span><br><span class="line">REV=`git rev-list HEAD | wc -l | awk <span class="string">'&#123;print $1&#125;'</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"build version : "</span> <span class="variable">$REV</span></span><br><span class="line"></span><br><span class="line">ssh -i ~/Documents/aws/password.pem ubuntu@127.0.0.147 &lt;&lt; EOF</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'current version '</span> <span class="variable">$REV</span></span><br><span class="line">	ssh -i pems/password.pem ubuntu@127.0.0.157 &lt;&lt; EOF</span><br><span class="line">	ls</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'hello version '</span> <span class="variable">$REV</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1947,7 +1933,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1996,7 +1982,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
