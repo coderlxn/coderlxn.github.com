@@ -303,6 +303,372 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/" itemprop="url">
+                  在不同Docker容器中部署nginx和wusgi服务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-15 15:41:43" itemprop="dateCreated datePublished" datetime="2018-11-15T15:41:43+08:00">2018-11-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-30 18:32:48" itemprop="dateModified" datetime="2018-11-30T18:32:48+08:00">2018-11-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="单独的uwsgi服务"><a href="#单独的uwsgi服务" class="headerlink" title="单独的uwsgi服务"></a>单独的uwsgi服务</h4><p>首先部署并测试uwsgi服务能否正常运行。这里是build一个image，然后进行测试。</p>
+<ul>
+<li><p>编写一个简单的server程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">b"Hello World"</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置uwsgi的启动脚本，需要注意的是服务器的地址要使用0.0.0.0，否则后面的nginx访问是走不通的，因为现在还没有配置nginx，提供http服务进行测试</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="attr">http</span> = <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8001</span></span><br><span class="line"><span class="attr">wsgi-file</span> = server.py</span><br><span class="line"><span class="attr">master</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">processes</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">threads</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">stats</span> = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9191</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包成docker image，Dockerfile内容如下</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将官方 Python 运行时用作父镜像</span></span><br><span class="line"><span class="keyword">FROM</span> python</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将工作目录设置为 /app</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 将当前目录内容复制到位于 /app 中的容器中</span></span></span><br><span class="line"><span class="bash">ADD . /app</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 安装 requirements.txt 中指定的任何所需软件包</span></span></span><br><span class="line"><span class="bash">RUN CC=gcc pip install uwsgi</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 在容器启动时运行 app.py</span></span></span><br><span class="line"><span class="bash">CMD [<span class="string">"uwsgi"</span>, <span class="string">"server.ini"</span>]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动打包的image，开放8001端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8001:8001 -d uwsgiimage</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器中访问localhost:8001</p>
+</li>
+</ul>
+<h4 id="提供nginx代理"><a href="#提供nginx代理" class="headerlink" title="提供nginx代理"></a>提供nginx代理</h4><ul>
+<li><p>从nginx到uwsgi传输数据用的是socket连接，先修改uwsgi的访问方式，改为socket。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="attr">socket</span> = <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8001</span>    # uwsgi的监听地址，后面配置nginx会将<span class="number">80</span>端口的请求转发到这个端口</span><br><span class="line"><span class="attr">wsgi-file</span> = server.py</span><br><span class="line"><span class="attr">master</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">processes</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">threads</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">stats</span> = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9191</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入nginx的container中修改配置文件以提供代理功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 7caa4a9f7204 /bin/bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提供uwsgi服务，并将地址指向uwsgi的container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf/default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        #root   /usr/share/nginx/html;</span><br><span class="line">        #index  index.html index.htm;</span><br><span class="line">	include uwsgi_params;</span><br><span class="line">	uwsgi_pass 172.17.0.5:8001;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启nginx，然后在浏览器中访问localhost即可看到输出</p>
+</li>
+</ul>
+<h4 id="绑定服务器地址"><a href="#绑定服务器地址" class="headerlink" title="绑定服务器地址"></a>绑定服务器地址</h4><p>上面的步骤中有一个比较麻烦的点，每次需要查看uwsgi的地址，然后修改nginx的配置文件。可以通过dokcer的link参数来绑定uwsgi的地址。实际就是通过一个别名来动态获取目标container的ip。</p>
+<ul>
+<li><p>启动uwsgi时添加name参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8001:8001 --name uwsgi.app -d uwsgiimage</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动nginx的container时指定link参数到uwsgi的container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --link uwsgi.app -d nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件，通过name指向uwsgi</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        #root   /usr/share/nginx/html;</span><br><span class="line">        #index  index.html index.htm;</span><br><span class="line">	include uwsgi_params;</span><br><span class="line">	uwsgi_pass uwsgi.app:8001;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启nginx，在浏览器中访问localhost</p>
+</li>
+</ul>
+<h4 id="使用Flask框架"><a href="#使用Flask框架" class="headerlink" title="使用Flask框架"></a>使用Flask框架</h4><ul>
+<li><p>如果要使用Flask框架，则需要将uwsgi默认访问的application修改为Flask的app</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"&lt;span style='color:red'&gt;I am app 1&lt;/span&gt;"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在uwsgi的配置文件中增加一个<code>callable</code>参数指向app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">socket = 0.0.0.0:8001</span><br><span class="line">wsgi-file = server.py</span><br><span class="line">master = true</span><br><span class="line">processes = 4</span><br><span class="line">callable = app</span><br><span class="line">threads = 2</span><br><span class="line">stats = 127.0.0.1:9191</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/13/js常见问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/13/js常见问题/" itemprop="url">
+                  js常见问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-13 16:36:55 / 修改时间：16:40:02" itemprop="dateCreated datePublished" datetime="2018-11-13T16:36:55+08:00">2018-11-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/13/js常见问题/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/13/js常见问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="判断对象是否定义"><a href="#判断对象是否定义" class="headerlink" title="判断对象是否定义"></a>判断对象是否定义</h4><p>在访问一个不确定是否存在的对象前，需要判断对象是否已定义。<br>如果直接使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someobject) &#123;</span><br><span class="line">	<span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这中形式，会提示undefined错误，可以使用 <code>typeof</code> 关键词来获取类型进行对比<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> someobject !== <span class="string">"undefined"</span>) &#123;</span><br><span class="line">	<span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/13/MultiThread-and-Mutex-in-Qt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1608,349 +1974,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/10/08/Python-yield详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/08/Python-yield详解/" itemprop="url">
-                  Python yield详解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-08 19:07:00" itemprop="dateCreated datePublished" datetime="2018-10-08T19:07:00+08:00">2018-10-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-09 09:16:39" itemprop="dateModified" datetime="2018-10-09T09:16:39+08:00">2018-10-09</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/08/Python-yield详解/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/08/Python-yield详解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>通常的for…in…循环中，in后面是一个数组，这个数组就是一个可迭代对象，类似的还有链表，字符串，文件。它可以是mylist = [1, 2, 3]，也可以是mylist = [x*x for x in range(3)]。<br>它的缺陷是所有数据都在内存中，如果有海量数据的话将会非常耗内存。</li>
-<li>生成器是可以迭代的，但只可以读取它一次。因为用的时候才生成。比如 mygenerator = (x*x for x in range(3))，注意这里用到了()，它就不是数组，而上面的例子是[]。</li>
-<li>我理解的生成器(generator)能够迭代的关键是它有一个next()方法，工作原理就是通过重复调用next()方法，直到捕获一个异常。可以用上面的mygenerator测试。</li>
-<li>带有 yield 的函数不再是一个普通函数，而是一个生成器generator，可用于迭代，工作原理同上。</li>
-<li>yield 是一个类似 return 的关键字，迭代一次遇到yield时就返回yield后面(右边)的值。重点是：下一次迭代时，从上一次迭代遇到的yield后面的代码(下一行)开始执行。</li>
-<li>简要理解：yield就是 return 返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后(下一行)开始。</li>
-<li>带有yield的函数不仅仅只用于for循环中，而且可用于某个函数的参数，只要这个函数的参数允许迭代参数。比如array.extend函数，它的原型是array.extend(iterable)。</li>
-<li>send(msg)与next()的区别在于send可以传递参数给yield表达式，这时传递的参数会作为yield表达式的值，而yield的参数是返回给调用者的值。——换句话说，就是send可以强行修改上一个yield表达式值。比如函数中有一个yield赋值，a = yield 5，第一次迭代到这里会返回5，a还没有赋值。第二次迭代时，使用.send(10)，那么，就是强行修改yield 5表达式的值为10，本来是5的，那么a=10</li>
-<li>send(msg)与next()都有返回值，它们的返回值是当前迭代遇到yield时，yield后面表达式的值，其实就是当前迭代中yield后面的参数。</li>
-<li>第一次调用时必须先next()或send(None)，否则会报错，send后之所以为None是因为这时候没有上一个yield(根据第8条)。可以认为，next()等同于send(None)。</li>
-<li><p>代码示例1：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:UTF-8  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">yield_test</span><span class="params">(n)</span>:</span>  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):  </span><br><span class="line">        <span class="keyword">yield</span> call(i)  </span><br><span class="line">        print(<span class="string">"i="</span>,i)  </span><br><span class="line">    <span class="comment">#做一些其它的事情      </span></span><br><span class="line">    print(<span class="string">"do something."</span>)      </span><br><span class="line">    print(<span class="string">"end."</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(i)</span>:</span>  </span><br><span class="line">    <span class="keyword">return</span> i*<span class="number">2</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#使用for循环  </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> yield_test(<span class="number">5</span>):  </span><br><span class="line">    print(i,<span class="string">","</span>)</span><br></pre></td></tr></table></figure>
-<p>结果是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">0 ,  </span><br><span class="line">i= 0  </span><br><span class="line">2 ,  </span><br><span class="line">i= 1  </span><br><span class="line">4 ,  </span><br><span class="line">i= 2  </span><br><span class="line">6 ,  </span><br><span class="line">i= 3  </span><br><span class="line">8 ,  </span><br><span class="line">i= 4  </span><br><span class="line">do something.  </span><br><span class="line">end.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码示例2：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">node</span>.<span class="title">_get_child_candidates</span><span class="params">(self, distance, min_dist, max_dist)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self._leftchild <span class="keyword">and</span> distance - max_dist &lt; self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._leftchild</span><br><span class="line">    <span class="keyword">if</span> self._rightchild <span class="keyword">and</span> distance + max_dist &gt;= self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._rightchild</span><br></pre></td></tr></table></figure>
-<p>与前面不同的是，这个函数中没有for循环，但它依然可以用于迭代。node._get_child_candidates函数中有yield，所以它变成了一个迭代器，可以用于迭代。执行第一次迭代时（其实就是调用next()方法），如果有左节点并且距离满足要求，会执行第一个yield，这时会返回self._leftchild并完成第一个迭代。执行第二次迭代时，从第一个yield后面开始，如果有右节点并且距离满足要求，会执行第二个yield，这时会返回self._rightchild并完成第一个迭代。执行第三次迭代时，第二个yield后再无代码，捕获异常，退出迭代。<br>调用过程：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">result, candidates = list(), [self]</span><br><span class="line"><span class="keyword">while</span> candidates:</span><br><span class="line">    node = candidates.pop()</span><br><span class="line">    distance = node._get_dist(obj)</span><br><span class="line">    <span class="keyword">if</span> distance &lt;= max_dist <span class="keyword">and</span> distance &gt;= min_dist:</span><br><span class="line">        result.extend(node._values)</span><br><span class="line">    candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
-<p>上面的node._get_child_candidates(self, distance, min_dist, max_dist)是放在extend()函数中作为参数的，为什么可以这么用，就因为extend函数的参数不仅仅支持array，只要它是一个迭代器就可以。它的原型是array.extend(iterable)。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/10/08/正则表达式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/08/正则表达式/" itemprop="url">
-                  正则表达式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-08 15:31:16 / 修改时间：15:39:22" itemprop="dateCreated datePublished" datetime="2018-10-08T15:31:16+08:00">2018-10-08</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/08/正则表达式/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/08/正则表达式/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h5 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h5><ul>
-<li>i        执行对大小写不敏感的匹配</li>
-<li>g    执行全局匹配</li>
-<li>m    执行多匹配<br>例，js中的全局替换<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML; </span><br><span class="line">    <span class="keyword">var</span> txt = str.replace(<span class="regexp">/microsoft/gi</span>,<span class="string">"Runoob"</span>);</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = txt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="方括号查找某个范围的字符"><a href="#方括号查找某个范围的字符" class="headerlink" title="方括号查找某个范围的字符"></a>方括号查找某个范围的字符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[abc]	查找方括号之间的任何字符。</span><br><span class="line">[0-9]	查找任何从 0 至 9 的数字。</span><br><span class="line">(x|y)		查找任何以 | 分隔的选项。</span><br></pre></td></tr></table></figure>
-<h5 id="元字符是拥有特殊含义的字符"><a href="#元字符是拥有特殊含义的字符" class="headerlink" title="元字符是拥有特殊含义的字符"></a>元字符是拥有特殊含义的字符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\d				查找数字。</span><br><span class="line">\s				查找空白字符。</span><br><span class="line">\b				匹配单词边界。</span><br><span class="line">\uxxxx		查找以十六进制数 xxxx 规定的 Unicode 字符。</span><br></pre></td></tr></table></figure>
-<h5 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n+	匹配任何包含至少一个 n 的字符串。</span><br><span class="line">n*		匹配任何包含零个或多个 n 的字符串。</span><br><span class="line">n?		匹配任何包含零个或一个 n 的字符串。</span><br></pre></td></tr></table></figure>
-<p><a href="http://www.runoob.com/jsref/jsref-obj-regexp.html" target="_blank" rel="noopener">参考手册</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2002,7 +2025,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2053,7 +2076,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

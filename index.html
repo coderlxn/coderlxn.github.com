@@ -303,6 +303,308 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/14/nginx转发http和https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/14/nginx转发http和https/" itemprop="url">
+                  nginx转发http和https
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-14 17:26:06 / 修改时间：17:37:34" itemprop="dateCreated datePublished" datetime="2018-12-14T17:26:06+08:00">2018-12-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/14/nginx转发http和https/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/14/nginx转发http和https/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>现在有一个网站在4567端口提供http服务。为了提高安全性，转换为https的服务。<br>现在采用的方式是nginx作为代理服务，nginx自然不必多说，简单，强大。<br>将安全证书下载到cert文件夹下，分别是<code>nginx.crt</code>和<code>nignx.key</code>，新建配置文件<code>default.conf</code>内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 提供https服务，将ssl验证后的结果转发到实际的服务上</span><br><span class="line">server &#123; </span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name www.example.com;    </span><br><span class="line"></span><br><span class="line">    ### SSL cert files ### </span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /usr/cert/nginx.crt;</span><br><span class="line">    ssl_certificate_key /usr/cert/nginx.key;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:4567;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 将普通的http服务转发到443端口进行安全校验</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server;</span><br><span class="line">    server_name _;</span><br><span class="line">    return 301 https://$host$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在使用的是docker来创建nginx服务，省去的编译nginx的麻烦，而且基于alpine的nginx镜像只有不到18M。<br>创建服务的命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 443:443 -p 80:80 -v `pwd`/cert:/usr/cert -v `pwd`/conf/default.conf:/etc/nginx/conf.d/default.conf --name nginx --rm nginx:alpine</span><br></pre></td></tr></table></figure></p>
+<p>主要是开发443和80两个端口，然后将安全证书和配置文件挂载到container上</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/13/Qt问题收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/13/Qt问题收集/" itemprop="url">
+                  Qt问题收集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-13 14:44:11 / 修改时间：14:46:24" itemprop="dateCreated datePublished" datetime="2018-12-13T14:44:11+08:00">2018-12-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/13/Qt问题收集/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/13/Qt问题收集/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="connect-nullptr"><a href="#connect-nullptr" class="headerlink" title="connect nullptr"></a>connect nullptr</h4><p>如果sender是nullptr，会有一条提示信息输出，如果receiver是nullptr，会导致崩溃<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QObject *obj1 = <span class="keyword">new</span> QObject();</span><br><span class="line">QObject *obj2 = <span class="keyword">new</span> QObject();</span><br><span class="line">QObject *obj3 = <span class="literal">nullptr</span>;</span><br><span class="line">QObject::connect(obj1, &amp;QObject::destroyed, obj2, &amp;QObject::destroyed);</span><br><span class="line">QObject::connect(obj3, &amp;QObject::destroyed, obj2, &amp;QObject::destroyed);		<span class="comment">//QObject::connect: invalid null parameter</span></span><br><span class="line">QObject::connect(obj1, &amp;QObject::destroyed, obj3, &amp;QObject::destroyed);		<span class="comment">//Crash here!</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/12/自建私有的docker仓库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -349,7 +651,7 @@
                 
               
 
-              <time title="创建时间：2018-12-12 17:49:59 / 修改时间：18:02:11" itemprop="dateCreated datePublished" datetime="2018-12-12T17:49:59+08:00">2018-12-12</time>
+              <time title="创建时间：2018-12-12 17:49:59 / 修改时间：18:04:23" itemprop="dateCreated datePublished" datetime="2018-12-12T17:49:59+08:00">2018-12-12</time>
             
 
             
@@ -401,8 +703,9 @@
           
             <ul>
 <li>Ubuntu 16.04</li>
-<li>Docker version 18.09.0<br>Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。<br>所以需要自己新建一个docker仓库，官方已经提供了详细的<a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">说明文档</a>，此处只是坐下简单的总结。<br>首先安装docker-ce，安装<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce" target="_blank" rel="noopener">官网提供的安装方式</a>安装即可。</li>
+<li>Docker version 18.09.0</li>
 </ul>
+<p>Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。<br>所以需要自己新建一个docker仓库，官方已经提供了详细的<a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">说明文档</a>，此处只是坐下简单的总结。<br>首先安装docker-ce，安装<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce" target="_blank" rel="noopener">官网提供的安装方式</a>安装即可。</p>
 <p>可以通过简单的命令在本地建一个仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart=always --name registry registry:2</span><br></pre></td></tr></table></figure></p>
 <p>从命令中可以看出实际是启用了一个docker container来作为服务。<br>如果需要外部访问功能，就需要SSL证书。<br>在默认情况下会新建一个volume来存储docker文件，也可以自己来指定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --name registry \</span><br><span class="line">  -v `<span class="built_in">pwd</span>`/conf:/certs \</span><br><span class="line">  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/web.crt \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_KEY=/certs/web.key \</span><br><span class="line">  -p 443:443 \</span><br><span class="line">  registry</span><br></pre></td></tr></table></figure></p>
 
@@ -1516,372 +1819,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/" itemprop="url">
-                  在不同Docker容器中部署nginx和wusgi服务
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-15 15:41:43" itemprop="dateCreated datePublished" datetime="2018-11-15T15:41:43+08:00">2018-11-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-30 18:32:48" itemprop="dateModified" datetime="2018-11-30T18:32:48+08:00">2018-11-30</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/15/在不同Docker容器中部署nginx和wusgi服务/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="单独的uwsgi服务"><a href="#单独的uwsgi服务" class="headerlink" title="单独的uwsgi服务"></a>单独的uwsgi服务</h4><p>首先部署并测试uwsgi服务能否正常运行。这里是build一个image，然后进行测试。</p>
-<ul>
-<li><p>编写一个简单的server程序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">b"Hello World"</span>]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置uwsgi的启动脚本，需要注意的是服务器的地址要使用0.0.0.0，否则后面的nginx访问是走不通的，因为现在还没有配置nginx，提供http服务进行测试</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="attr">http</span> = <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8001</span></span><br><span class="line"><span class="attr">wsgi-file</span> = server.py</span><br><span class="line"><span class="attr">master</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">processes</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">threads</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">stats</span> = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9191</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>打包成docker image，Dockerfile内容如下</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将官方 Python 运行时用作父镜像</span></span><br><span class="line"><span class="keyword">FROM</span> python</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将工作目录设置为 /app</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 将当前目录内容复制到位于 /app 中的容器中</span></span></span><br><span class="line"><span class="bash">ADD . /app</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 安装 requirements.txt 中指定的任何所需软件包</span></span></span><br><span class="line"><span class="bash">RUN CC=gcc pip install uwsgi</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># 在容器启动时运行 app.py</span></span></span><br><span class="line"><span class="bash">CMD [<span class="string">"uwsgi"</span>, <span class="string">"server.ini"</span>]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动打包的image，开放8001端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8001:8001 -d uwsgiimage</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在浏览器中访问localhost:8001</p>
-</li>
-</ul>
-<h4 id="提供nginx代理"><a href="#提供nginx代理" class="headerlink" title="提供nginx代理"></a>提供nginx代理</h4><ul>
-<li><p>从nginx到uwsgi传输数据用的是socket连接，先修改uwsgi的访问方式，改为socket。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="attr">socket</span> = <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">8001</span>    # uwsgi的监听地址，后面配置nginx会将<span class="number">80</span>端口的请求转发到这个端口</span><br><span class="line"><span class="attr">wsgi-file</span> = server.py</span><br><span class="line"><span class="attr">master</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">processes</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">threads</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">stats</span> = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9191</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动nginx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入nginx的container中修改配置文件以提供代理功能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 7caa4a9f7204 /bin/bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>提供uwsgi服务，并将地址指向uwsgi的container</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># /etc/nginx/conf/default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        #root   /usr/share/nginx/html;</span><br><span class="line">        #index  index.html index.htm;</span><br><span class="line">	include uwsgi_params;</span><br><span class="line">	uwsgi_pass 172.17.0.5:8001;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启nginx，然后在浏览器中访问localhost即可看到输出</p>
-</li>
-</ul>
-<h4 id="绑定服务器地址"><a href="#绑定服务器地址" class="headerlink" title="绑定服务器地址"></a>绑定服务器地址</h4><p>上面的步骤中有一个比较麻烦的点，每次需要查看uwsgi的地址，然后修改nginx的配置文件。可以通过dokcer的link参数来绑定uwsgi的地址。实际就是通过一个别名来动态获取目标container的ip。</p>
-<ul>
-<li><p>启动uwsgi时添加name参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8001:8001 --name uwsgi.app -d uwsgiimage</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动nginx的container时指定link参数到uwsgi的container</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --link uwsgi.app -d nginx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件，通过name指向uwsgi</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        #root   /usr/share/nginx/html;</span><br><span class="line">        #index  index.html index.htm;</span><br><span class="line">	include uwsgi_params;</span><br><span class="line">	uwsgi_pass uwsgi.app:8001;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启nginx，在浏览器中访问localhost</p>
-</li>
-</ul>
-<h4 id="使用Flask框架"><a href="#使用Flask框架" class="headerlink" title="使用Flask框架"></a>使用Flask框架</h4><ul>
-<li><p>如果要使用Flask框架，则需要将uwsgi默认访问的application修改为Flask的app</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"&lt;span style='color:red'&gt;I am app 1&lt;/span&gt;"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在uwsgi的配置文件中增加一个<code>callable</code>参数指向app</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">socket = 0.0.0.0:8001</span><br><span class="line">wsgi-file = server.py</span><br><span class="line">master = true</span><br><span class="line">processes = 4</span><br><span class="line">callable = app</span><br><span class="line">threads = 2</span><br><span class="line">stats = 127.0.0.1:9191</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/13/js常见问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/13/js常见问题/" itemprop="url">
-                  js常见问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-13 16:36:55 / 修改时间：16:40:02" itemprop="dateCreated datePublished" datetime="2018-11-13T16:36:55+08:00">2018-11-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/13/js常见问题/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/13/js常见问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="判断对象是否定义"><a href="#判断对象是否定义" class="headerlink" title="判断对象是否定义"></a>判断对象是否定义</h4><p>在访问一个不确定是否存在的对象前，需要判断对象是否已定义。<br>如果直接使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someobject) &#123;</span><br><span class="line">	<span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这中形式，会提示undefined错误，可以使用 <code>typeof</code> 关键词来获取类型进行对比<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> someobject !== <span class="string">"undefined"</span>) &#123;</span><br><span class="line">	<span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1933,7 +1870,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1984,7 +1921,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

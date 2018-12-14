@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="Ubuntu 16.04 Docker version 18.09.0Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。  可以通过简单的命令在本地建一个仓库1docker r">
+  <meta name="description" content="Ubuntu 16.04 Docker version 18.09.0  Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。 可以通过简单的命令在本地建一个仓库1docker">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自建私有的docker仓库">
 <meta property="og:url" content="https://blog.jaxli.com/2018/12/12/自建私有的docker仓库/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
-<meta property="og:description" content="Ubuntu 16.04 Docker version 18.09.0Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。  可以通过简单的命令在本地建一个仓库1docker r">
+<meta property="og:description" content="Ubuntu 16.04 Docker version 18.09.0  Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。 可以通过简单的命令在本地建一个仓库1docker">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-12T10:02:11.513Z">
+<meta property="og:updated_time" content="2018-12-12T10:04:23.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自建私有的docker仓库">
-<meta name="twitter:description" content="Ubuntu 16.04 Docker version 18.09.0Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。  可以通过简单的命令在本地建一个仓库1docker r">
+<meta name="twitter:description" content="Ubuntu 16.04 Docker version 18.09.0  Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。所以需要自己新建一个docker仓库，官方已经提供了详细的说明文档，此处只是坐下简单的总结。首先安装docker-ce，安装官网提供的安装方式安装即可。 可以通过简单的命令在本地建一个仓库1docker">
 
 
 
@@ -345,7 +345,7 @@
                 
               
 
-              <time title="创建时间：2018-12-12 17:49:59 / 修改时间：18:02:11" itemprop="dateCreated datePublished" datetime="2018-12-12T17:49:59+08:00">2018-12-12</time>
+              <time title="创建时间：2018-12-12 17:49:59 / 修改时间：18:04:23" itemprop="dateCreated datePublished" datetime="2018-12-12T17:49:59+08:00">2018-12-12</time>
             
 
             
@@ -395,8 +395,9 @@
       
         <ul>
 <li>Ubuntu 16.04</li>
-<li>Docker version 18.09.0<br>Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。<br>所以需要自己新建一个docker仓库，官方已经提供了详细的<a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">说明文档</a>，此处只是坐下简单的总结。<br>首先安装docker-ce，安装<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce" target="_blank" rel="noopener">官网提供的安装方式</a>安装即可。</li>
+<li>Docker version 18.09.0</li>
 </ul>
+<p>Docker官方提供的docker hub功能很多，完全可以满足开发的需求，但在某些情况下需要将数据放在自己的服务器上。<br>所以需要自己新建一个docker仓库，官方已经提供了详细的<a href="https://docs.docker.com/registry/deploying/" target="_blank" rel="noopener">说明文档</a>，此处只是坐下简单的总结。<br>首先安装docker-ce，安装<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce" target="_blank" rel="noopener">官网提供的安装方式</a>安装即可。</p>
 <p>可以通过简单的命令在本地建一个仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart=always --name registry registry:2</span><br></pre></td></tr></table></figure></p>
 <p>从命令中可以看出实际是启用了一个docker container来作为服务。<br>如果需要外部访问功能，就需要SSL证书。<br>在默认情况下会新建一个volume来存储docker文件，也可以自己来指定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --name registry \</span><br><span class="line">  -v `<span class="built_in">pwd</span>`/conf:/certs \</span><br><span class="line">  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/web.crt \</span><br><span class="line">  -e REGISTRY_HTTP_TLS_KEY=/certs/web.key \</span><br><span class="line">  -p 443:443 \</span><br><span class="line">  registry</span><br></pre></td></tr></table></figure></p>
 
@@ -471,6 +472,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/12/13/Qt问题收集/" rel="prev" title="Qt问题收集">
+                Qt问题收集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -537,7 +542,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -588,7 +593,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -110,25 +110,25 @@
 
 
 
-  <meta name="description" content="docker save 和 docker load 丢失tag信息如果docker save时使用的是hash字段，导出的文件中不会包含tag信息，再次load后会导致tag丢失。可以使用tag名称来导出数据1234docker save xmppclient:6 -o xmppclient.tar# 导入时会恢复tag信息docker load -i xmppclient.tarLoaded i">
-<meta name="keywords" content="docker">
+  <meta name="description" content="现在有一个网站在4567端口提供http服务。为了提高安全性，转换为https的服务。现在采用的方式是nginx作为代理服务，nginx自然不必多说，简单，强大。将安全证书下载到cert文件夹下，分别是nginx.crt和nignx.key，新建配置文件default.conf内容如下1234567891011121314151617181920212223# 提供https服务，将ssl验证后的">
+<meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker常见问题">
-<meta property="og:url" content="https://blog.jaxli.com/2018/11/02/Docker常见问题/index.html">
+<meta property="og:title" content="nginx转发http和https">
+<meta property="og:url" content="https://blog.jaxli.com/2018/12/14/nginx转发http和https/index.html">
 <meta property="og:site_name" content="武器大师的备忘录">
-<meta property="og:description" content="docker save 和 docker load 丢失tag信息如果docker save时使用的是hash字段，导出的文件中不会包含tag信息，再次load后会导致tag丢失。可以使用tag名称来导出数据1234docker save xmppclient:6 -o xmppclient.tar# 导入时会恢复tag信息docker load -i xmppclient.tarLoaded i">
+<meta property="og:description" content="现在有一个网站在4567端口提供http服务。为了提高安全性，转换为https的服务。现在采用的方式是nginx作为代理服务，nginx自然不必多说，简单，强大。将安全证书下载到cert文件夹下，分别是nginx.crt和nignx.key，新建配置文件default.conf内容如下1234567891011121314151617181920212223# 提供https服务，将ssl验证后的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-23T02:55:38.000Z">
+<meta property="og:updated_time" content="2018-12-14T09:37:34.511Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker常见问题">
-<meta name="twitter:description" content="docker save 和 docker load 丢失tag信息如果docker save时使用的是hash字段，导出的文件中不会包含tag信息，再次load后会导致tag丢失。可以使用tag名称来导出数据1234docker save xmppclient:6 -o xmppclient.tar# 导入时会恢复tag信息docker load -i xmppclient.tarLoaded i">
+<meta name="twitter:title" content="nginx转发http和https">
+<meta name="twitter:description" content="现在有一个网站在4567端口提供http服务。为了提高安全性，转换为https的服务。现在采用的方式是nginx作为代理服务，nginx自然不必多说，简单，强大。将安全证书下载到cert文件夹下，分别是nginx.crt和nignx.key，新建配置文件default.conf内容如下1234567891011121314151617181920212223# 提供https服务，将ssl验证后的">
 
 
 
 
 
 
-  <link rel="canonical" href="https://blog.jaxli.com/2018/11/02/Docker常见问题/"/>
+  <link rel="canonical" href="https://blog.jaxli.com/2018/12/14/nginx转发http和https/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>Docker常见问题 | 武器大师的备忘录</title>
+  <title>nginx转发http和https | 武器大师的备忘录</title>
   
 
 
@@ -303,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/02/Docker常见问题/">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/14/nginx转发http和https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jax Li">
@@ -320,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker常见问题
+          <h1 class="post-title" itemprop="name headline">nginx转发http和https
               
             
           </h1>
@@ -345,24 +345,12 @@
                 
               
 
-              <time title="创建时间：2018-11-02 10:39:37" itemprop="dateCreated datePublished" datetime="2018-11-02T10:39:37+08:00">2018-11-02</time>
+              <time title="创建时间：2018-12-14 17:26:06 / 修改时间：17:37:34" itemprop="dateCreated datePublished" datetime="2018-12-14T17:26:06+08:00">2018-12-14</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-23 10:55:38" itemprop="dateModified" datetime="2018-11-23T10:55:38+08:00">2018-11-23</time>
               
             
           </span>
@@ -376,8 +364,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/Docker常见问题/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/02/Docker常见问题/" itemprop="commentCount"></span>
+                <a href="/2018/12/14/nginx转发http和https/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/14/nginx转发http和https/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -405,8 +393,9 @@
       
 
       
-        <h4 id="docker-save-和-docker-load-丢失tag信息"><a href="#docker-save-和-docker-load-丢失tag信息" class="headerlink" title="docker save 和 docker load 丢失tag信息"></a>docker save 和 docker load 丢失tag信息</h4><p>如果docker save时使用的是hash字段，导出的文件中不会包含tag信息，再次load后会导致tag丢失。<br>可以使用tag名称来导出数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker save xmppclient:6 -o xmppclient.tar</span><br><span class="line"><span class="comment"># 导入时会恢复tag信息</span></span><br><span class="line">docker load -i xmppclient.tar</span><br><span class="line">Loaded image: xmppclient:6</span><br></pre></td></tr></table></figure></p>
-<h4 id="docker-container变更开放端口"><a href="#docker-container变更开放端口" class="headerlink" title="docker container变更开放端口"></a>docker container变更开放端口</h4><p>通过<code>docker run</code>命令创建一个container时，可以指定要放开的端口。在container创建完成后如果要修改开发的端口，则不能直接把端口开放出来。<br>一个可行的方案是通过<code>docker commit</code>将当前的container保存为image，然后在此基础上创建新的container</p>
+        <p>现在有一个网站在4567端口提供http服务。为了提高安全性，转换为https的服务。<br>现在采用的方式是nginx作为代理服务，nginx自然不必多说，简单，强大。<br>将安全证书下载到cert文件夹下，分别是<code>nginx.crt</code>和<code>nignx.key</code>，新建配置文件<code>default.conf</code>内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 提供https服务，将ssl验证后的结果转发到实际的服务上</span><br><span class="line">server &#123; </span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name www.example.com;    </span><br><span class="line"></span><br><span class="line">    ### SSL cert files ### </span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /usr/cert/nginx.crt;</span><br><span class="line">    ssl_certificate_key /usr/cert/nginx.key;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:4567;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 将普通的http服务转发到443端口进行安全校验</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server;</span><br><span class="line">    server_name _;</span><br><span class="line">    return 301 https://$host$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在使用的是docker来创建nginx服务，省去的编译nginx的麻烦，而且基于alpine的nginx镜像只有不到18M。<br>创建服务的命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 443:443 -p 80:80 -v `pwd`/cert:/usr/cert -v `pwd`/conf/default.conf:/etc/nginx/conf.d/default.conf --name nginx --rm nginx:alpine</span><br></pre></td></tr></table></figure></p>
+<p>主要是开发443和80两个端口，然后将安全证书和配置文件挂载到container上</p>
 
       
     </div>
@@ -456,7 +445,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
         </div>
       
@@ -469,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/02/通过Bash脚本SSH登录后执行命令/" rel="next" title="通过Bash脚本SSH登录后执行命令">
-                <i class="fa fa-chevron-left"></i> 通过Bash脚本SSH登录后执行命令
+              <a href="/2018/12/13/Qt问题收集/" rel="next" title="Qt问题收集">
+                <i class="fa fa-chevron-left"></i> Qt问题收集
               </a>
             
           </div>
@@ -478,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/13/MultiThread-and-Mutex-in-Qt/" rel="prev" title="MultiThread and Mutex in Qt">
-                MultiThread and Mutex in Qt <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,17 +514,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -651,22 +627,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-save-和-docker-load-丢失tag信息"><span class="nav-number">1.</span> <span class="nav-text">docker save 和 docker load 丢失tag信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-container变更开放端口"><span class="nav-number">2.</span> <span class="nav-text">docker container变更开放端口</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
