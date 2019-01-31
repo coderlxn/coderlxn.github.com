@@ -303,6 +303,483 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2019/01/31/python3通过SQLAlchemy连接MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/31/python3通过SQLAlchemy连接MySQL/" itemprop="url">
+                  python3通过SQLAlchemy操作MySQL
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-31 17:25:16 / 修改时间：17:48:10" itemprop="dateCreated datePublished" datetime="2019-01-31T17:25:16+08:00">2019-01-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/31/python3通过SQLAlchemy连接MySQL/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/31/python3通过SQLAlchemy连接MySQL/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>SQLAlchemy是一个ORM工具，提供了数据库读写的功能。<br>但在连接MySQL的时候需要一个驱动组件，对于python3，推荐的一个组件为pymysql，在使用了pymysql进行MySQL连接时需要指定连接用的组件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine = create_engine(&apos;mysql+pymysql://user:password@127.0.0.1:3306/databasename?charset=utf8mb4&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>在上面的连接中指定了连接使用的编码类型charset=utf8mb4，使用utf8mb4是为了支持字符串的插入。<br>相应的，在MySQL数据库中的新建表格也需要指定为utf-8：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class User(Base):</span><br><span class="line">    __tablename__ = &apos;user_info&apos;</span><br><span class="line">    __table_args__ = &#123;&apos;mysql_collate&apos;: &apos;utf8_general_ci&apos;&#125;</span><br><span class="line"></span><br><span class="line">    uuid = Column(String(32), nullable=False, index=True, primary_key=True)</span><br><span class="line">    name = Column(String(255), nullable=False)</span><br><span class="line">    password = Column(String(64), nullable=True)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2019/01/10/SQLAlchemy问题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/SQLAlchemy问题记录/" itemprop="url">
+                  SQLAlchemy问题记录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-10 18:02:37 / 修改时间：18:04:29" itemprop="dateCreated datePublished" datetime="2019-01-10T18:02:37+08:00">2019-01-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/10/SQLAlchemy问题记录/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/10/SQLAlchemy问题记录/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="query的one在遇到empty时会抛出异常，first会返回None"><a href="#query的one在遇到empty时会抛出异常，first会返回None" class="headerlink" title="query的one在遇到empty时会抛出异常，first会返回None"></a>query的one在遇到empty时会抛出异常，first会返回None</h4>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/20/Rasa-NLU框架学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jax Li">
+      <meta itemprop="description" content="武器大师的备忘录">
+      <meta itemprop="image" content="/images/jax.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="武器大师的备忘录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/20/Rasa-NLU框架学习/" itemprop="url">
+                  Rasa NLU框架学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-20 17:19:18" itemprop="dateCreated datePublished" datetime="2018-12-20T17:19:18+08:00">2018-12-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-27 09:35:34" itemprop="dateModified" datetime="2018-12-27T09:35:34+08:00">2018-12-27</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/20/Rasa-NLU框架学习/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/20/Rasa-NLU框架学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>Rasa Core: 0.12.3</li>
+<li>Rasa NLU: 0.13.8</li>
+</ul>
+<h4 id="模块解释"><a href="#模块解释" class="headerlink" title="模块解释"></a>模块解释</h4><p>Rasa Core：对话控制的模块，通过对stories训练来获取对话流程模型<br>Rasa NLU：intent识别的模块，看名称就知道是NLU，将用户输入的内容识别为intent<br>NLU Pipeline：字面意思为管道，是nlu训练使用的算法和基础模型。最常见的pipeline有两个，spacy_sklearn和tensorflow_embedding，前者带有已有的训练结果，适合数据量较小的模型训练(1000)，后者不包含已有的训练模型，适合数据流较大的模型训练。</p>
+<h4 id="语言支持"><a href="#语言支持" class="headerlink" title="语言支持"></a>语言支持</h4><p>| backend  |  supported languages |</p>
+<p>| — | — |</p>
+<p>| spacy-sklearn  |  english (en), german (de), spanish (es), portuguese (pt), italian (it), dutch (nl), french  (fr)MITIE    english (en) |<br>| Jieba-MITIE  |  chinese (zh) * |</p>
+<p>Jieba-MITIE需要预先训练好的模型文件<code>data/total_word_feature_extractor_zh.dat</code>，训练工具使用(MITIE Wordrep Tool)[<a href="https://github.com/mit-nlp/MITIE/tree/master/tools/wordrep" target="_blank" rel="noopener">https://github.com/mit-nlp/MITIE/tree/master/tools/wordrep</a> ]</p>
+<h4 id="训练数据的格式"><a href="#训练数据的格式" class="headerlink" title="训练数据的格式"></a>训练数据的格式</h4><p>有markdown和json两种格式。<br>json格式的每条数据包含三个要点：text，intent，entities：</p>
+<ul>
+<li>The text is the search query; An example of what would be submitted for parsing. [required]</li>
+<li>The intent is the intent that should be associated with the text. [optional]</li>
+<li>The entities are specific parts of the text which need to be identified. [optional]</li>
+</ul>
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>安装rasa_core，这个会包含rasa_nlu的模块</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/19/使用nginx对kibana进行地址转发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1352,480 +1829,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/10/Python-Locust并发压力测试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/10/Python-Locust并发压力测试/" itemprop="url">
-                  Python Locust并发压力测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-10 10:05:59 / 修改时间：15:48:24" itemprop="dateCreated datePublished" datetime="2018-12-10T10:05:59+08:00">2018-12-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/10/Python-Locust并发压力测试/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/10/Python-Locust并发压力测试/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Locust简介"><a href="#Locust简介" class="headerlink" title="Locust简介"></a>Locust简介</h4><p>Locust是一个Python语言开发的测试工具，主要用于web网页或后台接口的测试。更具用户编写的测试方法，创建大量的测试协程来发送网络请求，测试服务器对于并发请求的响应能力。</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>从github上clone源码 <a href="https://github.com/locustio/locust" target="_blank" rel="noopener">https://github.com/locustio/locust</a> ，进到项目目录使用命令<code>python3 setup.py install</code>来安装依赖的库和当前项目。</p>
-<h4 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h4><p>使用python编写测试模板，启动测试程序后指定并发的请求的数量，然后开始测试</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> locust <span class="keyword">import</span> HttpLocust, TaskSet, task</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(l)</span>:</span></span><br><span class="line">    l.client.get(<span class="string">"/"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stats</span><span class="params">(l)</span>:</span></span><br><span class="line">    l.client.get(<span class="string">"/info"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserTasks</span><span class="params">(TaskSet)</span>:</span></span><br><span class="line">    <span class="comment"># one can specify tasks like this</span></span><br><span class="line">    tasks = [index, stats]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># but it might be convenient to use the @task decorator</span></span><br><span class="line"><span class="meta">    @task</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">page404</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.client.get(<span class="string">"/hello"</span>)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebsiteUser</span><span class="params">(HttpLocust)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Locust user class that does requests to the locust web server running on localhost</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    host = <span class="string">"http://127.0.0.1:5000"</span></span><br><span class="line">    min_wait = <span class="number">2000</span></span><br><span class="line">    max_wait = <span class="number">5000</span></span><br><span class="line">    task_set = UserTasks</span><br></pre></td></tr></table></figure>
-<p>使用命令<code>locust -f locustfile.py --host=http://www.126.com</code></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/12/07/git使用depth拉取后获取完整分支/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/07/git使用depth拉取后获取完整分支/" itemprop="url">
-                  git使用depth拉取后获取完整分支
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-07 10:21:56 / 修改时间：10:26:23" itemprop="dateCreated datePublished" datetime="2018-12-07T10:21:56+08:00">2018-12-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/07/git使用depth拉取后获取完整分支/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/07/git使用depth拉取后获取完整分支/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在拉去git仓库时，如果使用了depth=1之类的参数，拉去的数据只有master分支的最新节点。<br>可以使用fetch来获取更多的节点数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch  --unshallow</span><br></pre></td></tr></table></figure></p>
-<p>但仍然只有master分支的数据，这个时候执行git checkout会提示其他的分支不存在，可以安装下面的步骤来获取完整的分支数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. git remote set-branches origin &apos;*&apos;</span><br><span class="line">2. git fetch -v</span><br><span class="line">3. git checkout the-branch-i-ve-been-looking-for</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.jaxli.com/2018/11/21/Python利用decorator实现plugin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jax Li">
-      <meta itemprop="description" content="武器大师的备忘录">
-      <meta itemprop="image" content="/images/jax.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="武器大师的备忘录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/21/Python利用decorator实现plugin/" itemprop="url">
-                  Python利用decorator实现plugin
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-21 16:05:24 / 修改时间：16:33:58" itemprop="dateCreated datePublished" datetime="2018-11-21T16:05:24+08:00">2018-11-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/21/Python利用decorator实现plugin/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/21/Python利用decorator实现plugin/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>插件模式应该有的一个基本功能就是扩展简单，在扩展的时候只需要按照固定的格式开发自己的内容，然后插件系统自动的去发现和加载插件进入系统中。</p>
-<ul>
-<li>注册机制<br>在开发的插件时向插件系统进行注册，但又要求不能修改现有的代码，这个和decorator的功能非常相似。所以首先考虑通过decorator来提供插件的注册机制，在开发插件的时候默认像插件系统进行注册。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># registry.py</span></span><br><span class="line">REGISTERED_CLASSED = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">registered_class</span><span class="params">(cls)</span>:</span></span><br><span class="line">    REGISTERED_CLASSED.append(cls)</span><br><span class="line">    print(<span class="string">"Class &#123;&#125; registered"</span>.format(cls))</span><br><span class="line">    <span class="keyword">return</span> cls</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样在开发的时候需要添加一个registered_class的装饰器即可<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plugina.py</span></span><br><span class="line"><span class="keyword">from</span> .abstractplugin <span class="keyword">import</span> AbstractPlugin</span><br><span class="line"><span class="keyword">from</span> .classregistry <span class="keyword">import</span> registered_class</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@registered_class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PluginA</span><span class="params">(AbstractPlugin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Plugin A init"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Plugin A run"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这样在导入插件模块的时候会将插件注册到插件列表中。<br>另外的一个问题就是现在必须要明确的导入插件文件才会触发decorator的运行，最好的情况是只需要将插件文件放到指定目录下就会自动的进行进行导入并注册。</p>
-<ul>
-<li>自动导入<br>通过importlib可以实现模块的导入功能，可以在运行时通过importlib将插件的模块导入来触发插件的注册。<br>在插件package的<strong>init</strong>.py文件中变量当前的所有文件并依次进行导入。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># __init__.py</span></span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"><span class="keyword">from</span> .classregistry <span class="keyword">import</span> REGISTERED_CLASSED</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> basename, dirname, join</span><br><span class="line"><span class="keyword">from</span> glob <span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line">pwd = dirname(__file__)</span><br><span class="line">lst = glob(join(pwd, <span class="string">"*.py"</span>))</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> lst:</span><br><span class="line">    file_name = basename(x)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> file_name.startswith(<span class="string">"__"</span>):</span><br><span class="line">        importlib.import_module(<span class="string">".&#123;&#125;"</span>.format(file_name[:<span class="number">-3</span>]), __package__)</span><br><span class="line"></span><br><span class="line">__all__ = [<span class="string">"REGISTERED_CLASSED"</span>]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>通过<strong>all</strong>来限制外部的访问</p>
-<ul>
-<li>其他问题<br>在相对路径导入的时候，需要提供package的名称，并且要主要package的相对地址</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1872,7 +1880,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1927,7 +1935,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1981,7 +1993,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

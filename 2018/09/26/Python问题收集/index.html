@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="武器大师的备忘录">
 <meta property="og:description" content="python引入模块时import与from … import的区别 import datetime是引入整个datetime包，如果使用datetime包中的datetime类,需要加上模块名的限定。 12import datetimeprint datetime.datetime.now()  from datetime import datetime是只引入datetime包里的dateti">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-13T02:28:34.792Z">
+<meta property="og:updated_time" content="2019-01-08T09:17:26.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python问题收集">
 <meta name="twitter:description" content="python引入模块时import与from … import的区别 import datetime是引入整个datetime包，如果使用datetime包中的datetime类,需要加上模块名的限定。 12import datetimeprint datetime.datetime.now()  from datetime import datetime是只引入datetime包里的dateti">
@@ -362,7 +362,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-13 10:28:34" itemprop="dateModified" datetime="2018-12-13T10:28:34+08:00">2018-12-13</time>
+                <time title="修改时间：2019-01-08 17:17:26" itemprop="dateModified" datetime="2019-01-08T17:17:26+08:00">2019-01-08</time>
               
             
           </span>
@@ -443,7 +443,8 @@
 </ul>
 <h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>yield 是一个类似 return 的关键字，只是这个函数返回的是个生成器。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">createGenerator</span><span class="params">()</span> :</span></span><br><span class="line"><span class="meta">... </span>   mylist = range(<span class="number">3</span>)</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">for</span> i <span class="keyword">in</span> mylist :</span><br><span class="line"><span class="meta">... </span>       <span class="keyword">yield</span> i*i</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mygenerator = createGenerator() <span class="comment"># create a generator</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(mygenerator) <span class="comment"># mygenerator is an object!</span></span><br><span class="line">&lt;generator object createGenerator at <span class="number">0xb7555c34</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> mygenerator:</span><br><span class="line"><span class="meta">... </span>    print(i)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
 <p>当你调用这个函数的时候，函数内部的代码并不立马执行 ，这个函数只是返回一个生成器对象</p>
-<h4 id="Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"><a href="#Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join" class="headerlink" title="Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"></a>Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join</h4>
+<h4 id="Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"><a href="#Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join" class="headerlink" title="Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"></a>Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join</h4><h4 id="Python不支持对于metaclass的多重继承"><a href="#Python不支持对于metaclass的多重继承" class="headerlink" title="Python不支持对于metaclass的多重继承"></a>Python不支持对于metaclass的多重继承</h4><p>如果存在多重继承的情况，会抛出异常<br>TypeError: Error when calling the metaclass bases metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases</p>
+
       
     </div>
 
@@ -594,7 +595,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -649,7 +650,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -699,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python引入模块时import与from-…-import的区别"><span class="nav-number">1.</span> <span class="nav-text">python引入模块时import与from … import的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python主线程退出时，工作线程不会退出，而是等待工作完成后退出"><span class="nav-number">2.</span> <span class="nav-text">python主线程退出时，工作线程不会退出，而是等待工作完成后退出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数内部修改全局变量"><span class="nav-number">3.</span> <span class="nav-text">函数内部修改全局变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#binary和string转换"><span class="nav-number">4.</span> <span class="nav-text">binary和string转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否存在并调用类的方法"><span class="nav-number">5.</span> <span class="nav-text">判断是否存在并调用类的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向MySQL数据库添加时间数据"><span class="nav-number">6.</span> <span class="nav-text">向MySQL数据库添加时间数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#str的format方法中数字会当做字面量进行处理"><span class="nav-number">7.</span> <span class="nav-text">str的format方法中数字会当做字面量进行处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#importlib进行相对路径导入的时候，需要指定包的的相对关系"><span class="nav-number">8.</span> <span class="nav-text">importlib进行相对路径导入的时候，需要指定包的的相对关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list中的append和extend的区别"><span class="nav-number">9.</span> <span class="nav-text">list中的append和extend的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yield"><span class="nav-number">10.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"><span class="nav-number">11.</span> <span class="nav-text">Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python引入模块时import与from-…-import的区别"><span class="nav-number">1.</span> <span class="nav-text">python引入模块时import与from … import的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python主线程退出时，工作线程不会退出，而是等待工作完成后退出"><span class="nav-number">2.</span> <span class="nav-text">python主线程退出时，工作线程不会退出，而是等待工作完成后退出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数内部修改全局变量"><span class="nav-number">3.</span> <span class="nav-text">函数内部修改全局变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#binary和string转换"><span class="nav-number">4.</span> <span class="nav-text">binary和string转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否存在并调用类的方法"><span class="nav-number">5.</span> <span class="nav-text">判断是否存在并调用类的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向MySQL数据库添加时间数据"><span class="nav-number">6.</span> <span class="nav-text">向MySQL数据库添加时间数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#str的format方法中数字会当做字面量进行处理"><span class="nav-number">7.</span> <span class="nav-text">str的format方法中数字会当做字面量进行处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#importlib进行相对路径导入的时候，需要指定包的的相对关系"><span class="nav-number">8.</span> <span class="nav-text">importlib进行相对路径导入的时候，需要指定包的的相对关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list中的append和extend的区别"><span class="nav-number">9.</span> <span class="nav-text">list中的append和extend的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yield"><span class="nav-number">10.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join"><span class="nav-number">11.</span> <span class="nav-text">Process的start会启动线程，但线程中的内容不会执行，需要join之后才会执行。必须要start之后才能调用join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python不支持对于metaclass的多重继承"><span class="nav-number">12.</span> <span class="nav-text">Python不支持对于metaclass的多重继承</span></a></li></ol></div>
             
 
           </div>
@@ -719,7 +724,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
